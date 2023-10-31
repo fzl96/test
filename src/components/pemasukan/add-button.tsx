@@ -22,7 +22,7 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { set, useForm } from "react-hook-form";
 import { z } from "zod";
-import { pemasukanCreateSchema } from "@/lib/validations/pemasukan";
+import { pemasukanCreateSchema } from "@/lib/validations/form";
 import { createPemasukan } from "@/lib/actions";
 
 interface PemasukanAddButtonProps extends ButtonProps {}
@@ -85,7 +85,10 @@ export function AddButton({
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid py-2">
             <div className="space-y-1 items-center gap-4">
-              <Label htmlFor="jumlah" className="text-right required-field">
+              <Label
+                htmlFor="jumlah"
+                className="text-right after:content-['*']"
+              >
                 Jumlah
               </Label>
               <Input
@@ -110,7 +113,7 @@ export function AddButton({
               </Label>
               <Input
                 id="keterangan"
-                placeholder="Masukkan keterangan (opsional)"
+                placeholder="Masukkan keterangan"
                 className="col-span-3"
                 {...register("keterangan")}
               />

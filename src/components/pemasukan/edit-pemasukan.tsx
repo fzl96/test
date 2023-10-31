@@ -22,7 +22,7 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { set, useForm } from "react-hook-form";
 import { z } from "zod";
-import { pemasukanCreateSchema } from "@/lib/validations/pemasukan";
+import { pemasukanCreateSchema } from "@/lib/validations/form";
 import { updatePemasukan } from "@/lib/actions";
 import { revalidatePath } from "next/cache";
 

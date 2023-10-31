@@ -1,8 +1,8 @@
 import { fetchFilteredPemasukan } from "@/lib/data";
-import { formatDate, formatCurrency, formatKeterangan } from "@/lib/utils";
+import { formatDate, formatCurrency } from "@/lib/utils";
 import { EditButton } from "@/components/pemasukan/edit-pemasukan";
 import DeleteButton from "@/components/pemasukan/delete-pemasukan";
-import { Keterangan, KeteranganMobile } from "./keterangan";
+import { Keterangan, KeteranganMobile } from "@/components/keterangan";
 
 export async function PemasukanTable({ currentPage }: { currentPage: number }) {
   const pemasukan = await fetchFilteredPemasukan(currentPage);

@@ -1,4 +1,3 @@
-import { Breadcrumbs } from "@/components/breadcrumbs";
 import { DashboardHeader } from "@/components/dashboard-header";
 import { Suspense } from "react";
 import { AddButton } from "@/components/pemasukan/add-button";
@@ -24,7 +23,7 @@ export default async function Page({
         breadcrumbs={[
           { label: "Dashboard", href: "/dashboard" },
           { label: "Keuangan", href: "", active: false },
-          { label: "Pemasukan", href: "/dashboard/pemasukan" },
+          { label: "Pemasukan", href: "/dashboard/keuangan/pemasukan" },
         ]}
       >
         <AddButton />

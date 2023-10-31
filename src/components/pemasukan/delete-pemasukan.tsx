@@ -2,7 +2,6 @@
 
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -11,8 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button, ButtonProps, buttonVariants } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Icons } from "@/components/icons";
@@ -65,10 +63,10 @@ export default function DeleteButton({ id }: DeleteButtonProps) {
                 return;
               }
 
-              setIsDeleteLoading(false);
-              setShowDeleteAlert(false);
               router.refresh();
 
+              setIsDeleteLoading(false);
+              setShowDeleteAlert(false);
               toast({
                 title: "Berhasil",
                 description: "Pemasukan berhasil dihapus",
