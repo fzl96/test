@@ -69,7 +69,7 @@ export function TableSkeleton() {
               <th scope="col" className="px-3 py-5 font-medium">
                 Jumlah
               </th>
-              <th scope="col" className="px-3 py-5 font-medium">
+              <th scope="col" className="px-3 py-5 w-[500px] font-medium">
                 Keterangan
               </th>
               <th scope="col" className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6">
