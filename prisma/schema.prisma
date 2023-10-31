@@ -15,3 +15,40 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Pemasukan {
+  id         String   @id @default(cuid())
+  jumlah     Int
+  keterangan String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Pengeluaran {
+  id         String   @id @default(cuid())
+  jumlah     Int
+  keterangan String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Inventaris {
+  id         String   @id @default(cuid())
+  nama       String
+  jumlah     Int
+  keterangan String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Jamaah {
+  id         String   @id @default(cuid())
+  nama       String
+  status     String
+  pekerjaan  String
+  penghasilan Int
+  alamat     String
+  noHp       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
