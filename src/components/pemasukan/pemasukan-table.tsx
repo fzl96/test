@@ -1,11 +1,11 @@
-import { fetchFilteredPemasukan } from "@/lib/data";
+import { fetchFilteredPengeluaran } from "@/lib/data";
 import { formatDate, formatCurrency } from "@/lib/utils";
 import { EditButton } from "@/components/pemasukan/edit-pemasukan";
 import DeleteButton from "@/components/pemasukan/delete-pemasukan";
 import { Keterangan, KeteranganMobile } from "@/components/keterangan";
 
 export async function PemasukanTable({ currentPage }: { currentPage: number }) {
-  const pemasukan = await fetchFilteredPemasukan(currentPage);
+  const pemasukan = await fetchFilteredPengeluaran(currentPage);
 
   return (
     <div className="px-5 inline-block min-w-full align-middle">
@@ -15,9 +15,9 @@ export async function PemasukanTable({ currentPage }: { currentPage: number }) {
             <div key={masuk.id} className="mb-2 w-full rounded-md bg-white p-4">
               {masuk.keterangan && (
                 <div className="flex items-center justify-between border-b pb-4">
-                  <p className="text-sm text-gray-500">
+                  <div className="text-sm text-gray-500">
                     <KeteranganMobile ket={masuk.keterangan} />
-                  </p>
+                  </div>
                 </div>
               )}
               <div className="flex w-full items-center justify-between pt-4">

@@ -2,7 +2,7 @@
 
 import { db } from "@/lib/db";
 import { z } from "zod";
-import { pemasukanCreateSchema } from "@/lib/validations/pemasukan";
+import { pemasukanCreateSchema } from "@/lib/validations/form";
 import { DateTime } from "luxon";
 import { revalidatePath } from "next/cache";
 
@@ -17,19 +17,12 @@ export async function createPemasukan(formData: FormData) {
   }
 
   const { keterangan, jumlah } = result.data;
-  // const date = new Date();
-  // const dt = DateTime.now().setZone(jakartaTimezone);
-  // const formattedDate = dt.toFormat("yyyy-MM-dd HH:mm:ss ZZZZ");
-  // console.log(date);
-  // console.log(formattedDate);
 
   try {
     const data = await db.pemasukan.create({
       data: {
         keterangan,
         jumlah,
-        // createdAt: date,
-        // updatedAt: date,
       },
     });
 
