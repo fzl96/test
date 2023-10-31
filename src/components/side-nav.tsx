@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export function SideNav() {
   return (
-    <div className="md:w-60 bg-white h-screen flex-1 fixed border-r border-zinc-200 hidden md:flex">
+    <div className="md:w-60 bg-white h-screen flex-1 fixed border-zinc-200 hidden md:flex">
       <div className="flex flex-col space-y-6 w-full">
         <Link
           href="/"
@@ -48,8 +48,10 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
         <>
           <button
             onClick={toggleSubMenu}
-            className={`flex flex-row items-center p-2 rounded-lg w-full justify-between hover:bg-accent ${
-              pathname.includes(item.path) ? "bg-accent" : ""
+            className={`flex flex-row items-center p-2 rounded-lg w-full justify-between ${
+              pathname.includes(item.path)
+                ? "bg-primary text-primary-foreground font-semibold"
+                : "hover:bg-accent"
             }`}
           >
             <div className="flex flex-row space-x-4 items-center">
@@ -85,7 +87,7 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
           href={item.path}
           className={`flex flex-row space-x-4 items-center p-2 rounded-lg  ${
             item.path === pathname
-              ? "bg-primary text-primary-foreground"
+              ? "bg-primary text-primary-foreground font-semibold"
               : item.path === ""
               ? "hover:bg-accent"
               : "hover:bg-accent"
