@@ -12,8 +12,8 @@ export const sideNavItems: SideNavItem[] = [
     icon: "wallet",
     submenu: true,
     subMenuItems: [
-      { title: "Pemasukan", path: "/dashboard/pemasukan" },
-      { title: "Pengeluaran", path: "/dashboard/pengeluaran" },
+      { title: "Pemasukan", path: "/dashboard/keuangan/pemasukan" },
+      { title: "Pengeluaran", path: "/dashboard/keuangan/pengeluaran" },
     ],
   },
   {
