@@ -31,10 +31,12 @@ import {
   Wallet2,
   Folder,
   Newspaper,
+  Pen,
   LucideIcon,
 } from "lucide-react";
 
 export const Icons = {
+  pen: Pen,
   newspaper: Newspaper,
   folder: Folder,
   wallet: Wallet2,
