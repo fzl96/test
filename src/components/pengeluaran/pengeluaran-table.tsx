@@ -22,9 +22,9 @@ export async function PengeluaranTable({
             >
               {keluar.keterangan && (
                 <div className="flex items-center justify-between border-b pb-4">
-                  <p className="text-sm text-gray-500">
+                  <div className="text-sm text-gray-500">
                     <KeteranganMobile ket={keluar.keterangan} />
-                  </p>
+                  </div>
                 </div>
               )}
               <div className="flex w-full items-center justify-between pt-4">

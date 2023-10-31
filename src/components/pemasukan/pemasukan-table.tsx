@@ -1,11 +1,11 @@
-import { fetchFilteredPengeluaran } from "@/lib/data";
+import { fetchFilteredPemasukan } from "@/lib/data";
 import { formatDate, formatCurrency } from "@/lib/utils";
 import { EditButton } from "@/components/pemasukan/edit-pemasukan";
 import DeleteButton from "@/components/pemasukan/delete-pemasukan";
 import { Keterangan, KeteranganMobile } from "@/components/keterangan";
 
 export async function PemasukanTable({ currentPage }: { currentPage: number }) {
-  const pemasukan = await fetchFilteredPengeluaran(currentPage);
+  const pemasukan = await fetchFilteredPemasukan(currentPage);
 
   return (
     <div className="px-5 inline-block min-w-full align-middle">
