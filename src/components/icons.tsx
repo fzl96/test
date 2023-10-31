@@ -28,10 +28,16 @@ import {
   ArrowLeftRight,
   Trash2,
   FileEdit,
+  Wallet2,
+  Folder,
+  Newspaper,
   LucideIcon,
 } from "lucide-react";
 
 export const Icons = {
+  newspaper: Newspaper,
+  folder: Folder,
+  wallet: Wallet2,
   trash2: Trash2,
   logo: Command,
   close: X,
