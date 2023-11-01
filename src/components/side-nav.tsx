@@ -16,7 +16,7 @@ export function SideNav() {
       <div className="flex flex-col space-y-6 w-full">
         <Link
           href="/"
-          className="flex flex-row space-x-3 items-center justify-center md:justify-start md:px-6 boder-b border-zinc-200 h-12 w-full"
+          className="flex flex-row space-x-3 items-center border-b justify-center md:justify-start md:px-6 boder-b border-zinc-200 h-12 w-full"
         >
           {/* <span className="h-7 w-7 bg-zinc-300 rounded-lg" /> */}
           <Image
