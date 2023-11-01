@@ -48,7 +48,7 @@ model Jamaah {
   pekerjaan  String
   penghasilan Int
   alamat     String
-  noHp       String
+  noHp       String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
