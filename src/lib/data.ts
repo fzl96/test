@@ -61,3 +61,48 @@ export async function fetchPengeluaranPages() {
     throw new Error("Gagal mengambil jumlah halaman pengeluaran");
   }
 }
+
+export async function fetchFilteredInventaris(
+  currentPage: number,
+  query: string
+) {
+  noStore();
+
+  try {
+    const data = await db.inventaris.findMany({
+      where: {
+        nama: {
+          contains: query,
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      skip: (currentPage - 1) * ITEMS_PER_PAGE,
+      take: ITEMS_PER_PAGE,
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data inventaris");
+  }
+}
+
+export async function fetchInventarisPages(query: string) {
+  try {
+    const totalItems = await db.inventaris.count({
+      where: {
+        nama: {
+          contains: query,
+        },
+      },
+    });
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+    return totalPages;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil jumlah halaman inventaris");
+  }
+}

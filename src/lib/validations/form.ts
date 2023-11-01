@@ -23,3 +23,14 @@ export const pengeluaranSchema = z.object({
       message: "Jumlah harus lebih dari 0",
     }),
 });
+
+export const inventarisSchema = z.object({
+  nama: z.string().min(1, { message: "Nama harus diisi" }),
+  jumlah: z
+    .number({
+      required_error: "Jumlah harus diisi",
+      invalid_type_error: "Jumlah harus berupa angka",
+    })
+    .min(0, { message: "Jumlah harus positif" }),
+  keterangan: z.string().optional(),
+});
