@@ -9,6 +9,7 @@ import { Icons } from "@/components/icons";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export function SideNav() {
   return (
@@ -93,13 +94,15 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
       ) : (
         <Link
           href={item.path}
-          className={`flex flex-row space-x-4 items-center p-2 rounded-lg  ${
+          className={cn(
+            "flex flex-row space-x-4 items-center p-2 rounded-lg",
+            pathname.includes(item.path) && item.path !== "/dashboard"
+              ? "bg-primary text-primary-foreground font-semibold"
+              : "",
             item.path === pathname
               ? "bg-primary text-primary-foreground font-semibold"
-              : item.path === ""
-              ? "hover:bg-accent"
               : "hover:bg-accent"
-          }`}
+          )}
         >
           <Icon width="18" height="18" />
           <span className="flex">{item.title}</span>
