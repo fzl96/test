@@ -12,7 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button, ButtonProps, buttonVariants } from "@/components/ui/button";
+import { Button, ButtonProps } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Icons } from "@/components/icons";
 
@@ -20,11 +20,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { pemasukanCreateSchema } from "@/lib/validations/form";
 import { updatePemasukan } from "@/lib/actions";
-import { revalidatePath } from "next/cache";
 
 interface PemasukanAddButtonProps extends ButtonProps {
   id: string;
@@ -69,10 +68,6 @@ export function EditButton({
     }
 
     setIsDialogOpen(false);
-    reset({
-      jumlah: 0,
-      keterangan: "",
-    });
     toast({
       title: "Berhasil",
       description: "Pemasukan berhasil diubah",

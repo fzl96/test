@@ -68,10 +68,6 @@ export function EditButton({
     }
 
     setIsDialogOpen(false);
-    reset({
-      jumlah: 0,
-      keterangan: "",
-    });
     toast({
       title: "Berhasil",
       description: "Pengeluaran berhasil diubah",
