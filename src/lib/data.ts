@@ -106,3 +106,60 @@ export async function fetchInventarisPages(query: string) {
     throw new Error("Gagal mengambil jumlah halaman inventaris");
   }
 }
+
+export async function fetchFilteredJamaah(currentPage: number, query: string) {
+  noStore();
+
+  try {
+    const data = await db.jamaah.findMany({
+      where: {
+        nama: {
+          contains: query,
+        },
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+      skip: (currentPage - 1) * ITEMS_PER_PAGE,
+      take: ITEMS_PER_PAGE,
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data jamaah");
+  }
+}
+
+export async function fetchJamaahById(id: string) {
+  try {
+    const data = await db.jamaah.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data jamaah");
+  }
+}
+
+export async function fetchJamaahPages(query: string) {
+  try {
+    const totalItems = await db.jamaah.count({
+      where: {
+        nama: {
+          contains: query,
+        },
+      },
+    });
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+    return totalPages;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil jumlah halaman jamaah");
+  }
+}
