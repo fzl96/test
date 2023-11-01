@@ -8,6 +8,7 @@ import { SideNavItem } from "@/lib/definitions";
 import { Icons } from "@/components/icons";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 export function SideNav() {
   return (
@@ -17,7 +18,14 @@ export function SideNav() {
           href="/"
           className="flex flex-row space-x-3 items-center justify-center md:justify-start md:px-6 boder-b border-zinc-200 h-12 w-full"
         >
-          <span className="h-7 w-7 bg-zinc-300 rounded-lg" />
+          {/* <span className="h-7 w-7 bg-zinc-300 rounded-lg" /> */}
+          <Image
+            src="/logo.png"
+            width="40"
+            height="40"
+            className="rounded-lg"
+            alt="Logo"
+          />
           <span className="font-bold text-lg hidden md:flex">
             Zaid Bin Tsabit
           </span>
