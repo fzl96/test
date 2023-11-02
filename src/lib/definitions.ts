@@ -19,3 +19,9 @@ export type MenuItemWithSubMenuProps = {
   item: SideNavItem;
   toggleOpen: () => void;
 };
+
+export type Monthly = {
+  month: string | number;
+  totalPemasukan: number;
+  totalPengeluaran: number;
+};

@@ -20,7 +20,7 @@ export function DashboardHeader({
 }) {
   return (
     <div className="p-5">
-      <Breadcrumbs breadcrumbs={breadcrumbs || []} />
+      {breadcrumbs?.length && <Breadcrumbs breadcrumbs={breadcrumbs || []} />}
       <div className="flex justify-between gap-5 items-center">
         <div className="grid gap-1">
           <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">

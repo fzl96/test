@@ -32,3 +32,18 @@ export const sideNavItems: SideNavItem[] = [
     icon: "newspaper",
   },
 ];
+
+export const months: { value: number; label: string; short: string }[] = [
+  { value: 1, label: "Januari", short: "Jan" },
+  { value: 2, label: "Februari", short: "Feb" },
+  { value: 3, label: "Maret", short: "Mar" },
+  { value: 4, label: "April", short: "Apr" },
+  { value: 5, label: "Mei", short: "Mei" },
+  { value: 6, label: "Juni", short: "Jun" },
+  { value: 7, label: "Juli", short: "Jul" },
+  { value: 8, label: "Agustus", short: "Agu" },
+  { value: 9, label: "September", short: "Sep" },
+  { value: 10, label: "Oktober", short: "Okt" },
+  { value: 11, label: "November", short: "Nov" },
+  { value: 12, label: "Desember", short: "Des" },
+];
