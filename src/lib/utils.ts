@@ -1,19 +1,17 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { format } from "date-fns";
+import { id } from "date-fns/locale";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 export function formatDate(date: Date) {
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  } as const;
-
-  return new Intl.DateTimeFormat("id-ID", options).format(date);
+  const newDate = format(date, "eeee, d MMM yyyy", {
+    locale: id,
+  });
+  return newDate;
 }
 
 export function formatCurrency(amount: number) {
