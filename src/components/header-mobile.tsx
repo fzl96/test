@@ -10,7 +10,7 @@ import { SideNavItem, MenuItemWithSubMenuProps } from "@/lib/definitions";
 import { motion, useCycle } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-export function HeaderMobile() {
+export function HeaderMobile({ role }: { role: string }) {
   const pathname = usePathname();
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
@@ -34,6 +34,11 @@ export function HeaderMobile() {
         className="absolute grid w-full gap-1 px-10 py-16"
       >
         {sideNavItems.map((item, idx) => {
+          if (
+            item.path === "/dashboard/pengurus" &&
+            role.toLowerCase() !== "admin"
+          )
+            return null;
           const isLastItem = idx === sideNavItems.length - 1; // Check if it's the last item
 
           return (

@@ -11,7 +11,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-export function SideNav() {
+export function SideNav({ role }: { role: string }) {
   return (
     <div className="md:w-60 bg-white h-screen flex-1 fixed border-zinc-200 hidden md:flex">
       <div className="flex flex-col space-y-6 w-full">
@@ -34,6 +34,11 @@ export function SideNav() {
 
         <div className="flex flex-col space-y-2  md:px-6">
           {sideNavItems.map((item, idx) => {
+            if (
+              item.path === "/dashboard/pengurus" &&
+              role.toLowerCase() !== "admin"
+            )
+              return null;
             return <MenuItem key={idx} item={item} />;
           })}
         </div>

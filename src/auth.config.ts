@@ -36,6 +36,7 @@ export const authConfig = {
           ...session.user,
           id: token.id,
           username: token.username,
+          role: token.role,
         },
       };
     },
@@ -46,6 +47,7 @@ export const authConfig = {
           ...token,
           id: u.id,
           username: u.username,
+          role: u.role,
         };
       }
       return token;

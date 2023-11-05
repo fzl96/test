@@ -16,11 +16,13 @@ export default async function Layout({
 
   return (
     <div className="flex">
-      <SideNav />
+      {/* @ts-ignore */}
+      <SideNav role={session?.user.role} />
       <main className="flex-1">
         <MarginWidthWrapper>
           <Header />
-          <HeaderMobile />
+          {/* @ts-ignore */}
+          <HeaderMobile role={session?.user.role} />
           <PageWrapper>{children}</PageWrapper>
         </MarginWidthWrapper>
       </main>
