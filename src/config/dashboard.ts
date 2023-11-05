@@ -31,6 +31,11 @@ export const sideNavItems: SideNavItem[] = [
     path: "/dashboard/artikel",
     icon: "newspaper",
   },
+  {
+    title: "Pengaturan",
+    path: "/dashboard/pengaturan",
+    icon: "settings",
+  },
 ];
 
 export const months: { value: number; label: string; short: string }[] = [

@@ -54,3 +54,11 @@ export const jamaahSchema = z.object({
   alamat: z.string().min(1, { message: "Alamat harus diisi" }),
   noHp: z.string().optional(),
 });
+
+export const userSettingFormSchema = z.object({
+  nama: z.string().optional(),
+  username: z.string().optional(),
+  newPassword: z.string().optional(),
+  oldPassword: z.string().optional(),
+  confirmPassword: z.string().optional(),
+});

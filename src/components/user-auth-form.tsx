@@ -107,7 +107,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             Login
           </button>
           {loginError && (
-            <p className="px-1 text-base text-red-600">{loginError}</p>
+            <p className="px-1 text-base text-red-600">
+              Username atau Password salah
+            </p>
           )}
         </div>
       </form>

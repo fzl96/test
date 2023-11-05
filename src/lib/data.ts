@@ -303,3 +303,25 @@ export async function fetchChartData(year: number) {
     throw new Error("Gagal mengambil data chart");
   }
 }
+
+export async function fetchUserData(id: string) {
+  noStore();
+
+  try {
+    const data = await db.user.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        name: true,
+        username: true,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data user");
+  }
+}
