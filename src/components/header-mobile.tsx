@@ -31,7 +31,7 @@ export function HeaderMobile() {
       />
       <motion.ul
         variants={variants}
-        className="absolute grid w-full gap-3 px-10 py-16"
+        className="absolute grid w-full gap-1 px-10 py-16"
       >
         {sideNavItems.map((item, idx) => {
           const isLastItem = idx === sideNavItems.length - 1; // Check if it's the last item
@@ -45,7 +45,7 @@ export function HeaderMobile() {
                   <Link
                     href={item.path}
                     onClick={() => toggleOpen()}
-                    className={`flex w-full text-2xl ${
+                    className={`flex w-full text-lg ${
                       item.path === pathname ? "font-bold" : ""
                     }`}
                   >
@@ -140,7 +140,7 @@ const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
     <>
       <MenuItem>
         <button
-          className="flex w-full text-2xl"
+          className="flex w-full text-lg"
           onClick={() => setSubMenuOpen(!subMenuOpen)}
         >
           <div className="flex flex-row justify-between w-full items-center">
@@ -150,7 +150,7 @@ const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
               {item.title}
             </span>
             <div className={`${subMenuOpen && "rotate-180"}`}>
-              <ChevronDown width="24" height="24" />
+              <ChevronDown width="20" height="20" />
             </div>
           </div>
         </button>

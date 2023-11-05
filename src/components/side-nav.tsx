@@ -17,7 +17,7 @@ export function SideNav() {
       <div className="flex flex-col space-y-6 w-full">
         <Link
           href="/"
-          className="flex flex-row space-x-3 items-center border-b justify-center md:justify-start md:px-6 boder-b border-zinc-200 h-12 w-full"
+          className="flex flex-row space-x-2 items-center border-b justify-center md:justify-start md:px-6 boder-b border-zinc-200 h-[55.8px] w-full"
         >
           {/* <span className="h-7 w-7 bg-zinc-300 rounded-lg" /> */}
           <Image
@@ -27,7 +27,7 @@ export function SideNav() {
             className="rounded-lg"
             alt="Logo"
           />
-          <span className="font-bold text-lg hidden md:flex">
+          <span className="font-semibold tracking-tight text-lg hidden md:flex">
             Zaid Bin Tsabit
           </span>
         </Link>
