@@ -104,7 +104,7 @@ export function JamaahForm({
               name="nama"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nama</FormLabel>
+                  <FormLabel className="required-field">Nama</FormLabel>
                   <Input
                     id="nama"
                     placeholder="Masukkan nama"
@@ -120,7 +120,7 @@ export function JamaahForm({
               name="status"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Status</FormLabel>
+                  <FormLabel className="required-field">Status</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -147,7 +147,7 @@ export function JamaahForm({
               name="pekerjaan"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Pekerjaan</FormLabel>
+                  <FormLabel className="required-field">Pekerjaan</FormLabel>
                   <Input
                     id="pekerjaan"
                     placeholder="Masukkan pekerjaan"
@@ -162,7 +162,7 @@ export function JamaahForm({
               name="penghasilan"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Penghasilan</FormLabel>
+                  <FormLabel className="required-field">Penghasilan</FormLabel>
                   <Input
                     id="penghasilan"
                     placeholder="Masukkan penghasilan"
@@ -178,7 +178,7 @@ export function JamaahForm({
               name="alamat"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Alamat</FormLabel>
+                  <FormLabel className="required-field">Alamat</FormLabel>
                   <Input id="alamat" placeholder="Masukkan alamat" {...field} />
                   <FormMessage />
                 </FormItem>
