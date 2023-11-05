@@ -196,7 +196,7 @@ export function JamaahForm({
               )}
             />
           </div>
-          <div className="justify-end flex gap-2 mt-5">
+          <div className="flex gap-2 mt-5">
             <Link
               href="/dashboard/jamaah"
               className={cn(

@@ -186,7 +186,7 @@ export function PengurusForm({
               )}
             />
           </div>
-          <div className="justify-end flex gap-2 mt-5">
+          <div className="flex gap-2 mt-5">
             <Link
               href="/dashboard/pengurus"
               className={cn(
