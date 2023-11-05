@@ -55,6 +55,14 @@ export const jamaahSchema = z.object({
   noHp: z.string().optional(),
 });
 
+export const pengurusSchema = z.object({
+  nama: z.string().min(1, { message: "Nama harus diisi" }),
+  username: z.string().min(4, { message: "Username minimal 4 karakter" }),
+  password: z.string().optional(),
+  confirmPassword: z.string().optional(),
+  role: z.enum(["ADMIN", "PENGURUS"]),
+});
+
 export const userSettingFormSchema = z.object({
   nama: z.string().optional(),
   username: z.string().optional(),

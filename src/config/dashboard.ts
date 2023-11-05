@@ -32,6 +32,11 @@ export const sideNavItems: SideNavItem[] = [
     icon: "newspaper",
   },
   {
+    title: "Pengurus",
+    path: "/dashboard/pengurus",
+    icon: "user",
+  },
+  {
     title: "Pengaturan",
     path: "/dashboard/pengaturan",
     icon: "settings",

@@ -325,3 +325,105 @@ export async function fetchUserData(id: string) {
     throw new Error("Gagal mengambil data user");
   }
 }
+
+export async function fetchFilteredUsers(currentPage: number, query: string) {
+  noStore();
+
+  try {
+    const data = await db.user.findMany({
+      where: {
+        OR: [
+          {
+            name: {
+              contains: query,
+            },
+          },
+          {
+            username: {
+              contains: query,
+            },
+          },
+        ],
+      },
+      select: {
+        id: true,
+        name: true,
+        username: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+      skip: (currentPage - 1) * ITEMS_PER_PAGE,
+      take: ITEMS_PER_PAGE,
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data users");
+  }
+}
+
+export async function fetchUsersPages(query: string) {
+  noStore();
+  try {
+    const totalItems = await db.user.count({
+      where: {
+        OR: [
+          {
+            name: {
+              contains: query,
+            },
+          },
+          {
+            username: {
+              contains: query,
+            },
+          },
+        ],
+      },
+    });
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+    return totalPages;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil jumlah halaman users");
+  }
+}
+
+export async function fetchPengurusById(id: string) {
+  noStore();
+  try {
+    const data = await db.user.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        name: true,
+        username: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    const pengurus = {
+      id: data?.id,
+      nama: data?.name,
+      username: data?.username,
+      role: data?.role,
+      createdAt: data?.createdAt,
+      updatedAt: data?.updatedAt,
+    };
+
+    return pengurus;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data pengurus");
+  }
+}
