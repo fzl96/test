@@ -104,7 +104,10 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className=" mt-32 mx-auto max-w-5xl sm:mt-56 relative bg-primary/70 rounded-xl">
+      <div
+        id="jadwal-sholat"
+        className=" mt-32 mx-auto max-w-5xl sm:mt-56 relative bg-primary/70 rounded-xl"
+      >
         <Suspense fallback={<div>Loading...</div>}>
           <div className="my-8 space-y-4 w-full p-20 md:flex md:space-x-12 md:space-y-0">
             <div className="text-white space-y-2">
