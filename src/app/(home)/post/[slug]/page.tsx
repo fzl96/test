@@ -22,12 +22,20 @@ export default async function Page({
 
   return (
     <MaxWidthWrapper className="mb-12 mt-10 md:mt-20 flex flex-col w-full">
-      <div className="flex gap-10 items-start">
+      <div className="flex gap-10 items-start md:flex-row flex-col">
         <article className="prose">
-          <div className="flex gap-5">
+          <div className="flex gap-5 mb-0">
             <div className="flex p-7 rounded-xl border  bg-gray-400/5 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl flex-col">
-              <h1 className="mb-0">{post?.judul}</h1>
-              <h4 className="text-gray-500 mt-3 mb-5 font-normal flex items-center gap-3">
+              <h1 className="mb-0 text-2xl md:text-4xl">{post?.judul}</h1>
+              <div className="flex md:hidden text-sm">
+                <p className="my-3">
+                  {post?.penulis?.name} |{" "}
+                  {format(post?.tanggal || new Date(), "cccc, dd MMMM yyyy", {
+                    locale: id,
+                  })}
+                </p>
+              </div>
+              <h4 className="text-gray-500 mt-3 mb-5 font-normal md:flex hidden items-center gap-3 ">
                 {post?.penulis?.name}
                 <span> | </span>
                 <span>
@@ -67,12 +75,12 @@ export default async function Page({
             </div>
           </div>
         </article>
-        <aside className="prose md:top-[4rem] md:sticky">
+        <aside className="prose md:top-[4rem] md:sticky md:px-0 px-3">
           <h3 className="text-xl font-semibold">
             {capitalizeFirstLetter(post?.jenis.toLowerCase() || "lainnya")}{" "}
             Terbaru
           </h3>
-          <div className="">
+          <div className="px-3">
             <Suspense fallback={<div>Loading...</div>}>
               {post?.jenis === "KEGIATAN" && <AsideKegiatan />}
               {post?.jenis === "PENGUMUMAN" && <AsidePengumuman />}
