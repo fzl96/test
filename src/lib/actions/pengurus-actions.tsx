@@ -6,7 +6,7 @@ import { pengurusSchema } from "@/lib/validations/form";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 type FormData = z.infer<typeof pengurusSchema>;
 

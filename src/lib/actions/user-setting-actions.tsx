@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { z } from "zod";
 import { userSettingFormSchema } from "@/lib/validations/form";
 import { Prisma } from "@prisma/client";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { signOut } from "../auth";
 import { redirect } from "next/navigation";
 
