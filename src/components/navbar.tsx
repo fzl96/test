@@ -4,6 +4,7 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { buttonVariants } from "@/components/ui/button";
 import { NavMenu } from "@/components/nav-menu";
+import { MobileNavToggle } from "@/components/mobile-nav-toggle";
 
 export async function Navbar() {
   const session = await auth();
@@ -24,6 +25,9 @@ export async function Navbar() {
             />
             <span>Zaid bin Tsabit</span>
           </Link>
+          <div className="md:hidden block">
+            <MobileNavToggle loggedIn={!!user} />
+          </div>
           <div className="hidden items-center space-x-4 sm:flex">
             <>
               <NavMenu />
