@@ -15,14 +15,16 @@ export default async function Pengumuman() {
             return (
               <div className="border-b p-5 flex gap-5" key={pengumuman.id}>
                 <div className="w-[200px] relative hidden md:block">
-                  <Image
-                    src={pengumuman.thumbnail || ""}
-                    alt={pengumuman.judul}
-                    fill={true}
-                    objectFit="cover"
-                    // sizes="200px"
-                    className="hidden md:block rounded-md"
-                  />
+                  <Link href={`/post/${pengumuman.slug}`}>
+                    <Image
+                      src={pengumuman.thumbnail || ""}
+                      alt={pengumuman.judul}
+                      fill={true}
+                      objectFit="cover"
+                      // sizes="200px"
+                      className="hidden md:block rounded-md"
+                    />
+                  </Link>
                 </div>
                 <div className="flex flex-col gap-3">
                   <Link href={`/post/${pengumuman.slug}`}>
