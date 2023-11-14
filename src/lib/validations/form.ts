@@ -70,3 +70,12 @@ export const userSettingFormSchema = z.object({
   oldPassword: z.string().optional(),
   confirmPassword: z.string().optional(),
 });
+
+export const postSchema = z.object({
+  judul: z.string().min(1, { message: "Judul harus diisi" }),
+  thumbnail: z.string().optional(),
+  authorId: z.string().min(1, { message: "Author harus diisi" }),
+  konten: z.string().min(1, { message: "Konten harus diisi" }),
+  jenis: z.enum(["ARTIKEL", "PENGUMUMAN", "KEGIATAN"]),
+  tanggal: z.date().optional(),
+});

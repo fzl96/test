@@ -16,7 +16,6 @@ import { useState } from "react";
 import { Icons } from "@/components/icons";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
-import { deleteInventaris } from "@/lib/actions/inventaris-actions";
 
 interface DeleteButtonProps {
   id: string;

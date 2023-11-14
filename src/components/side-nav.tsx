@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 export function SideNav({ role }: { role: string }) {
   return (
-    <div className="md:w-60 bg-white h-screen flex-1 fixed border-zinc-200 hidden md:flex">
+    <div className="md:w-60 bg-white h-screen flex-1 fixed border hidden md:flex">
       <div className="flex flex-col space-y-6 w-full">
         <Link
           href="/"
@@ -32,7 +32,7 @@ export function SideNav({ role }: { role: string }) {
           </span>
         </Link>
 
-        <div className="flex flex-col space-y-2  md:px-6">
+        <div className="flex flex-col space-y-2 md:px-6">
           {sideNavItems.map((item, idx) => {
             if (
               item.path === "/dashboard/pengurus" &&

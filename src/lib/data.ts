@@ -427,3 +427,70 @@ export async function fetchPengurusById(id: string) {
     throw new Error("Gagal mengambil data pengurus");
   }
 }
+
+export async function fetchFilteredPost(currentPage: number, query: string) {
+  noStore();
+
+  try {
+    const data = await db.post.findMany({
+      where: {
+        OR: [
+          {
+            judul: {
+              contains: query,
+            },
+          },
+        ],
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+      skip: (currentPage - 1) * ITEMS_PER_PAGE,
+      take: ITEMS_PER_PAGE,
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data post");
+  }
+}
+
+export async function fetchPostById(id: string) {
+  noStore();
+  try {
+    const data = await db.post.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data post");
+  }
+}
+
+export async function fetchPostPages(query: string) {
+  noStore();
+  try {
+    const totalItems = await db.post.count({
+      where: {
+        OR: [
+          {
+            judul: {
+              contains: query,
+            },
+          },
+        ],
+      },
+    });
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+    return totalPages;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil jumlah halaman post");
+  }
+}

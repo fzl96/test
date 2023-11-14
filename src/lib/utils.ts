@@ -58,3 +58,22 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+export function createSlug(title: string) {
+  const slug = title
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // Replace spaces with dashes
+    .replace(/[^\w-]+/g, ""); // Remove non-word characters (excluding dashes)
+
+  return slug;
+}
+
+export function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function removeHtmlTags(string: string) {
+  return string.replace(/(<([^>]+)>)/gi, "");
+}

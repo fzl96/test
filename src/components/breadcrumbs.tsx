@@ -9,11 +9,13 @@ interface BreadrumbProps {
 
 export function Breadcrumbs({
   breadcrumbs,
+  className,
 }: {
   breadcrumbs: BreadrumbProps[];
+  className?: string;
 }) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-6 block">
+    <nav aria-label="Breadcrumb" className={cn("mb-6 block", className)}>
       <ol className={cn("flex text-base md:text-lg ")}>
         {breadcrumbs.map((breadcrumb, index) => (
           <li

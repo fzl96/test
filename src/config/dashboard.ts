@@ -27,8 +27,8 @@ export const sideNavItems: SideNavItem[] = [
     icon: "users",
   },
   {
-    title: "Artikel",
-    path: "/dashboard/artikel",
+    title: "Post",
+    path: "/dashboard/post",
     icon: "newspaper",
   },
   {
