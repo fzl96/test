@@ -5,6 +5,15 @@ import { HeaderMobile } from "@/components/header-mobile";
 import { SideNav } from "@/components/side-nav";
 import { PageWrapper } from "@/components/page-wrapper";
 import { MarginWidthWrapper } from "@/components/margin-width-wrapper";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Dashboard Masjid Zaid bin Tsabit",
+    default: "Dashboard | Masjid Zaid bin Tsabit",
+  },
+  description: "Dashboard Masjid Zaid bin Tsabit",
+};
 
 export default async function Layout({
   children,

@@ -6,6 +6,12 @@ import { buttonVariants } from "@/components/ui/button";
 import { fetchUsersPages } from "@/lib/data";
 import Link from "next/link";
 import { Suspense } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pengurus",
+  description: "Akun pengurus aplikasi web Masjid Zaid bin Tsabit",
+};
 
 export default async function Page({
   searchParams,

@@ -6,6 +6,12 @@ import { fetchInventarisPages } from "@/lib/data";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { InventarisTable } from "@/components/inventaris/inventaris-table";
 import Search from "@/components/search";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Inventaris",
+  description: "Data inventaris dari Masjid Zaid bin Tsabit",
+};
 
 export default async function Page({
   searchParams,
@@ -20,7 +26,7 @@ export default async function Page({
   const totalPages = await fetchInventarisPages(query);
 
   return (
-    <>
+    <div className="md:px-5">
       <DashboardHeader
         title="Inventaris"
         breadcrumbs={[
@@ -41,6 +47,6 @@ export default async function Page({
           <Pagination totalPages={totalPages} />
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -8,6 +8,12 @@ import Search from "@/components/search";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { JamaahTable } from "@/components/jamaah/jamaah-table";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Jamaah",
+  description: "Data jamaah Masjid Zaid bin Tsabit",
+};
 
 export default async function Page({
   searchParams,
@@ -22,7 +28,7 @@ export default async function Page({
   const totalPages = await fetchJamaahPages(query);
 
   return (
-    <>
+    <div className="md:px-5">
       <DashboardHeader
         title="Jamaah"
         breadcrumbs={[
@@ -45,6 +51,6 @@ export default async function Page({
           <Pagination totalPages={totalPages} />
         </div>
       </div>
-    </>
+    </div>
   );
 }

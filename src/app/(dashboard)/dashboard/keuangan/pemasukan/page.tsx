@@ -5,6 +5,12 @@ import { PemasukanTable } from "@/components/pemasukan/pemasukan-table";
 import Pagination from "@/components/pagination";
 import { fetchPemasukanPages } from "@/lib/data";
 import { TableSkeleton } from "@/components/table-skeleton";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pemasukan",
+  description: "Data pemasukan Masjid Zaid bin Tsabit",
+};
 
 export default async function Page({
   searchParams,
@@ -17,7 +23,7 @@ export default async function Page({
   const totalPages = await fetchPemasukanPages();
 
   return (
-    <>
+    <div className="md:px-5">
       <DashboardHeader
         title="Pemasukan"
         breadcrumbs={[
@@ -36,6 +42,6 @@ export default async function Page({
           <Pagination totalPages={totalPages} />
         </div>
       </div>
-    </>
+    </div>
   );
 }

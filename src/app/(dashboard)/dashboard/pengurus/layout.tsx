@@ -10,5 +10,5 @@ export default async function Layout({
   // @ts-ignore
   if (session?.user.role.toLowerCase() !== "admin") redirect("/dashboard");
 
-  return <>{children}</>;
+  return <div className="px-5">{children}</div>;
 }
