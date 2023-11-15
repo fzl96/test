@@ -6,6 +6,7 @@ import Pagination from "@/components/pagination";
 import { fetchPemasukanPages } from "@/lib/data";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { Metadata } from "next";
+import { ExportPemasukan } from "@/components/pemasukan/export";
 
 export const metadata: Metadata = {
   title: "Pemasukan",
@@ -17,10 +18,15 @@ export default async function Page({
 }: {
   searchParams?: {
     page?: string;
+    month?: string;
+    year?: string;
   };
 }) {
   const currentPage = Number(searchParams?.page || 1);
   const totalPages = await fetchPemasukanPages();
+  const date = new Date();
+  const currentMonth = Number(searchParams?.month || date.getMonth() + 1);
+  const currentYear = Number(searchParams?.year || date.getFullYear());
 
   return (
     <div className="md:px-5">
@@ -32,7 +38,10 @@ export default async function Page({
           { label: "Pemasukan", href: "/dashboard/keuangan/pemasukan" },
         ]}
       >
-        <AddButton />
+        <div className="space-x-2">
+          <ExportPemasukan month={currentMonth} year={currentYear} />
+          <AddButton />
+        </div>
       </DashboardHeader>
       <div>
         <Suspense key={currentPage} fallback={<TableSkeleton />}>

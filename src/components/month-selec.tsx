@@ -10,38 +10,36 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { months } from "@/config/dashboard";
 
-export function YearSelect({ className }: { className?: string }) {
+export function MonthSelect({ className }: { className?: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const yearOptions = Array.from(
-    { length: 10 },
-    (_, i) => new Date().getFullYear() - i
-  );
-
-  const currentYear = Number(
-    searchParams.get("year") || new Date().getFullYear()
+  const currentMonth = Number(
+    searchParams.get("month") || new Date().getMonth() + 1
   );
 
   return (
     <Select
-      onValueChange={(year) => {
+      onValueChange={(month) => {
         const params = new URLSearchParams(searchParams);
-        params.set("year", String(year));
+        params.set("month", String(month));
         replace(`${pathname}?${params.toString()}`);
       }}
-      defaultValue={currentYear.toString()}
+      defaultValue={currentMonth.toString()}
     >
       <SelectTrigger className={className}>
-        <SelectValue>{currentYear}</SelectValue>
+        <SelectValue>
+          {months.find((month) => currentMonth === month.value)?.label}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {yearOptions.map((year) => (
-            <SelectItem value={year.toString()} key={year}>
-              {year}
+          {months.map((month) => (
+            <SelectItem value={month.value.toString()} key={month.value}>
+              {month.label}
             </SelectItem>
           ))}
         </SelectGroup>
