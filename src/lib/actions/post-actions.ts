@@ -11,6 +11,9 @@ type FormData = z.infer<typeof postSchema>;
 export async function createPost(formData: FormData) {
   const result = postSchema.safeParse(formData);
 
+  const date = new Date();
+  date.setHours(date.getHours() + 7);
+
   if (!result.success) {
     return { error: result.error.format() };
   }
@@ -32,6 +35,8 @@ export async function createPost(formData: FormData) {
         thumbnail,
         tanggal,
         slug,
+        createdAt: date,
+        updatedAt: date,
       },
     });
 
@@ -45,6 +50,9 @@ export async function createPost(formData: FormData) {
 
 export async function updatePost(id: string, formData: FormData) {
   const result = postSchema.safeParse(formData);
+
+  const date = new Date();
+  date.setHours(date.getHours() + 7);
 
   if (!result.success) {
     return { error: result.error.format() };
@@ -65,6 +73,7 @@ export async function updatePost(id: string, formData: FormData) {
         thumbnail,
         tanggal,
         slug,
+        updatedAt: date,
       },
     });
 

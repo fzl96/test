@@ -11,6 +11,9 @@ type FormData = z.infer<typeof pengeluaranSchema>;
 export async function createPengeluaran(formdata: FormData) {
   const result = pengeluaranSchema.safeParse(formdata);
 
+  const date = new Date();
+  date.setHours(date.getHours() + 7);
+
   if (!result.success) {
     return { error: "Data tidak valid" };
   }
@@ -22,6 +25,8 @@ export async function createPengeluaran(formdata: FormData) {
       data: {
         jumlah,
         keterangan,
+        createdAt: date,
+        updatedAt: date,
       },
     });
 
@@ -34,6 +39,9 @@ export async function createPengeluaran(formdata: FormData) {
 
 export async function updatePengeluaran(id: string, formdata: FormData) {
   const result = pengeluaranSchema.safeParse(formdata);
+
+  const date = new Date();
+  date.setHours(date.getHours() + 7);
 
   if (!result.success) {
     return { error: "Data tidak valid" };
@@ -49,6 +57,7 @@ export async function updatePengeluaran(id: string, formdata: FormData) {
       data: {
         jumlah,
         keterangan,
+        updatedAt: date,
       },
     });
 

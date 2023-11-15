@@ -17,30 +17,15 @@ export async function createPengurus(formData: FormData) {
     return { error: "Data tidak valid" };
   }
 
-  const { nama, username, password, confirmPassword, role } = result.data;
-
-  console.log(
-    nama,
-    username,
-    password,
-    confirmPassword,
-    role,
-    "ini dari pengurus-actions"
-  );
-
-  if (!password) return { error: "Password tidak boleh kosong" };
-  if (password.length < 4) return { error: "Password minimal 4 karakter" };
-  if (password !== confirmPassword) return { error: "Password tidak sama" };
-
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const { nama, jabatan, foto, noHp } = result.data;
 
   try {
-    const pengurus = await db.user.create({
+    const pengurus = await db.pengurus.create({
       data: {
-        name: nama,
-        username,
-        password: hashedPassword,
-        role,
+        nama,
+        jabatan,
+        foto,
+        noHp,
       },
     });
 
@@ -63,22 +48,17 @@ export async function updatePengurus(id: string, formData: FormData) {
     return { error: "Data tidak valid" };
   }
 
-  const { nama, username, password, confirmPassword, role } = result.data;
-  const dataToUpdate: Prisma.UserUpdateInput = { name: nama, username, role };
-
-  if (password) {
-    if (password !== confirmPassword) return { error: "Password tidak sama" };
-    if (password.length < 4) return { error: "Password minimal 4 karakter" };
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    dataToUpdate.password = hashedPassword;
-  }
+  const { nama, jabatan, foto, noHp } = result.data;
 
   try {
-    const pengurus = await db.user.update({
+    const pengurus = await db.pengurus.update({
       where: { id: id },
-      data: dataToUpdate,
+      data: {
+        nama,
+        jabatan,
+        foto,
+        noHp,
+      },
     });
 
     revalidatePath("/dashboard/pengurus");
@@ -95,7 +75,7 @@ export async function updatePengurus(id: string, formData: FormData) {
 
 export async function deletePengurus(id: string) {
   try {
-    await db.user.delete({
+    await db.pengurus.delete({
       where: { id: id },
     });
 
