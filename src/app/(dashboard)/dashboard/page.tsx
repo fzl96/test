@@ -16,20 +16,24 @@ export default function Page({
   const currentYear = Number(year) || new Date().getFullYear();
   return (
     <>
-      <div className="flex p-5 gap-5 items-center">
-        <div className="grid gap-1">
-          <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
-            Dashboard
-          </h1>
+      <div className="flex p-5 gap-4 flex-col">
+        <div className="px-5 md:pt-5">
+          <div className="flex items-center gap-2">
+            <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
+              Dashboard
+            </h1>
+            <YearSelect className="w-[100px]" />
+          </div>
         </div>
-        <YearSelect />
+        <div className="grid gap-2">
+          <Suspense fallback={<div>Loading...</div>}>
+            <DashboardCards year={currentYear} />
+          </Suspense>
+          <Suspense fallback={<div>Loading...</div>}>
+            <DashboardChart year={currentYear} />
+          </Suspense>
+        </div>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <DashboardCards year={currentYear} />
-      </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
-        <DashboardChart year={currentYear} />
-      </Suspense>
     </>
   );
 }

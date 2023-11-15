@@ -2,12 +2,12 @@ import { DashboardHeader } from "@/components/dashboard-header";
 import { PengurusForm } from "@/components/pengurus/form";
 import { fetchPengurusById } from "@/lib/data";
 import { Suspense } from "react";
-import { updatePengurus } from "@/lib/actions/pengurus-actions";
 import { Metadata } from "next";
+import { updatePengurus } from "@/lib/actions/pengurus-actions";
 
 export const metadata: Metadata = {
   title: "Edit Pengurus",
-  description: "Edit akun pengurus aplikasi web Masjid Zaid bin Tsabit",
+  description: "Edit pengurus Masjid Zaid bin Tsabit",
 };
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -15,9 +15,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   const pengurus = await fetchPengurusById(id);
 
   return (
-    <div className="md:px-5">
+    <div className="">
       <DashboardHeader
-        title="Edit Akun Pengurus"
+        title="Edit Pengurus"
         breadcrumbs={[
           { label: "Dashboard", href: "/dashboard" },
           { label: "Pengurus", href: "/dashboard/pengurus" },

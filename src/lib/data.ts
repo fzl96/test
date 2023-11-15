@@ -36,6 +36,46 @@ export async function fetchPemasukanPages() {
   }
 }
 
+export async function fetchPengeluaran(month: number, year: number) {
+  noStore();
+
+  try {
+    const data = await db.pengeluaran.findMany({
+      where: {
+        createdAt: {
+          gte: new Date(year, month - 1, 1),
+          lte: new Date(year, month, 1),
+        },
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data pengeluaran");
+  }
+}
+
+export async function fetchPemasukan(month: number, year: number) {
+  noStore();
+
+  try {
+    const data = await db.pemasukan.findMany({
+      where: {
+        createdAt: {
+          gte: new Date(year, month - 1, 1),
+          lte: new Date(year, month, 1),
+        },
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data pemasukan");
+  }
+}
+
 export async function fetchFilteredPengeluaran(currentPage: number) {
   noStore();
 
@@ -395,7 +435,7 @@ export async function fetchUsersPages(query: string) {
   }
 }
 
-export async function fetchPengurusById(id: string) {
+export async function fetchAkunById(id: string) {
   noStore();
   try {
     const data = await db.user.findUnique({
@@ -412,7 +452,7 @@ export async function fetchPengurusById(id: string) {
       },
     });
 
-    const pengurus = {
+    const akun = {
       id: data?.id,
       nama: data?.name,
       username: data?.username,
@@ -421,10 +461,10 @@ export async function fetchPengurusById(id: string) {
       updatedAt: data?.updatedAt,
     };
 
-    return pengurus;
+    return akun;
   } catch (error) {
     console.log("Database Error: ", error);
-    throw new Error("Gagal mengambil data pengurus");
+    throw new Error("Gagal mengambil data akun");
   }
 }
 
@@ -492,5 +532,75 @@ export async function fetchPostPages(query: string) {
   } catch (error) {
     console.log("Database Error: ", error);
     throw new Error("Gagal mengambil jumlah halaman post");
+  }
+}
+
+export async function fetchFilteredPengurus(
+  currentPage: number,
+  query: string
+) {
+  noStore();
+
+  try {
+    const data = await db.pengurus.findMany({
+      where: {
+        OR: [
+          {
+            nama: {
+              contains: query,
+            },
+          },
+        ],
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+      skip: (currentPage - 1) * ITEMS_PER_PAGE,
+      take: ITEMS_PER_PAGE,
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data pengurus");
+  }
+}
+
+export async function fetchPengurusById(id: string) {
+  noStore();
+  try {
+    const data = await db.pengurus.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data pengurus");
+  }
+}
+
+export async function fetchPengurusPages(query: string) {
+  noStore();
+  try {
+    const totalItems = await db.pengurus.count({
+      where: {
+        OR: [
+          {
+            nama: {
+              contains: query,
+            },
+          },
+        ],
+      },
+    });
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+    return totalPages;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil jumlah halaman pengurus");
   }
 }

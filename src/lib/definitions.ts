@@ -7,12 +7,51 @@ export type User = {
   password: string;
 };
 
+export type Keuangan = {
+  id: string;
+  jumlah: number;
+  keterangan: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type Pengurus = {
+  id: string;
+  nama: string;
+  jabatan:
+    | string
+    | "PENASEHAT"
+    | "KETUA"
+    | "WAKIL_KETUA"
+    | "SEKRETARIS"
+    | "BIDANG_DANA"
+    | "BIDANG_PENDIDIKAN_DAN_DAKWAH"
+    | "BIDANG_SARANA_DAN_PRASARANA"
+    | "BIDANG_SOSIAL"
+    | "BIDANG_KEMITRAAN_DAN_INFOKOM"
+    | "BIDANG_KEAMANAN_DAN_KETERTIBAN"
+    | "IMAM"
+    | "MUADZIN";
+  foto: string | null;
+  noHp: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type MainNavItem = {
+  title: string;
+  href: string;
+};
+
+export type SidebarNavItem = {
+  title: string;
+  items: SideNavItem[];
+};
+
 export type SideNavItem = {
   title: string;
-  path: string;
+  href: string;
   icon?: keyof typeof Icons;
-  submenu?: boolean;
-  subMenuItems?: SideNavItem[];
 };
 
 export type MenuItemWithSubMenuProps = {
@@ -65,4 +104,16 @@ export type Post = {
   tanggal: Date;
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type SiteConfig = {
+  name: string;
+  description: string;
+  url: string;
+  ogImage?: string;
+  links: {
+    facebook: string;
+    instagram: string;
+    youtube: string;
+  };
 };

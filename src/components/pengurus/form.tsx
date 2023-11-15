@@ -20,6 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
+import { Progress } from "@/components/ui/progress";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -30,12 +31,16 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { pengurusSchema } from "@/lib/validations/form";
 import { z } from "zod";
+import { useEdgeStore } from "@/lib/edgestore";
+import { useState } from "react";
+import { Label } from "../ui/label";
+import { SingleImageDropzone } from "../single-image-dropzone";
 
 type FormData = z.infer<typeof pengurusSchema>;
 
 const options: { value: string; label: string }[] = [
-  { value: "ADMIN", label: "Admin" },
-  { value: "PENGURUS", label: "Pengurus" },
+  { value: "IMAM", label: "Imam" },
+  { value: "MUADZIN", label: "Muadzin" },
 ];
 
 interface PengurusExtended extends FormData {
@@ -55,19 +60,36 @@ export function PengurusForm({
   const form = useForm<FormData>({
     resolver: zodResolver(pengurusSchema),
     defaultValues: {
-      nama: pengurus?.nama,
-      username: pengurus?.username,
-      password: "",
-      confirmPassword: "",
-      role: pengurus?.role,
+      nama: pengurus?.nama || "",
+      jabatan: pengurus?.jabatan || "IMAM",
+      foto: pengurus?.foto || "",
+      noHp: pengurus?.noHp || "",
     },
   });
+  const { edgestore } = useEdgeStore();
+  const [file, setFile] = useState<File>();
+  const [progress, setProgress] = useState(0);
   const { toast } = useToast();
 
   async function onSubmit(data: FormData) {
+    if (file && progress < 100) {
+      toast({
+        title: "Mohon tunggu",
+        description: "Foto sedang diunggah",
+      });
+      return;
+    }
     let res;
     if (updateFn && pengurus) {
       res = await updateFn(pengurus.id, data);
+
+      if (data.foto !== pengurus.foto) {
+        if (pengurus.foto) {
+          await edgestore.publicFiles.delete({
+            url: pengurus.foto,
+          });
+        }
+      }
     } else if (createFn) {
       res = await createFn(data);
     } else return;
@@ -79,6 +101,12 @@ export function PengurusForm({
         variant: "destructive",
       });
       return;
+    }
+
+    if (data.foto) {
+      await edgestore.publicFiles.confirmUpload({
+        url: data.foto || "",
+      });
     }
 
     router.push("/dashboard/pengurus");
@@ -95,12 +123,43 @@ export function PengurusForm({
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div className="grid gap-3">
+            <Label htmlFor="foto">Foto</Label>
+            <SingleImageDropzone
+              width={200}
+              value={file || form.watch("foto")}
+              dropzoneOptions={{
+                maxSize: 1024 * 1024 * 5,
+              }}
+              onChange={(file) => setFile(file)}
+              onFileRemoved={() => form.setValue("foto", "")}
+              onFileAdded={async (file) => {
+                try {
+                  const res = await edgestore.publicFiles.upload({
+                    file,
+                    options: {
+                      temporary: true,
+                    },
+                    input: { type: "profile" },
+                    onProgressChange: (progress) => {
+                      setProgress(progress);
+                    },
+                  });
+                  form.setValue("foto", res.url);
+                } catch (error) {
+                  console.log(error);
+                }
+              }}
+            />
+            <div className={cn("flex items-center gap-2", !file && "hidden")}>
+              <Progress value={progress} className="w-[180px]" />
+              {progress}%
+            </div>
             <FormField
               control={form.control}
               name="nama"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nama</FormLabel>
+                  <FormLabel className="required-field">Nama</FormLabel>
                   <Input
                     id="nama"
                     placeholder="Masukkan nama"
@@ -111,34 +170,20 @@ export function PengurusForm({
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
-              name="username"
+              name="jabatan"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <Input
-                    id="username"
-                    placeholder="Masukkan username"
-                    {...field}
-                  />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="role"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Role</FormLabel>
+                  <FormLabel className="required-field">Status</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Pilih Role" />
+                        <SelectValue placeholder="Pilih Status" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -155,32 +200,11 @@ export function PengurusForm({
             />
             <FormField
               control={form.control}
-              name="password"
+              name="noHp"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <Input
-                    id="password"
-                    placeholder="Masukkan password"
-                    type="password"
-                    {...field}
-                  />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Konfirmasi Password</FormLabel>
-                  <Input
-                    id="confirmPassword"
-                    placeholder="Masukkan password"
-                    type="password"
-                    {...field}
-                  />
+                  <FormLabel className="">No. HP</FormLabel>
+                  <Input id="noHp" placeholder="Masukkan No Hp" {...field} />
                   <FormMessage />
                 </FormItem>
               )}
@@ -199,10 +223,16 @@ export function PengurusForm({
             </Link>
             <Button
               type="submit"
-              disabled={form.formState.isSubmitting || !form.formState.isDirty}
+              disabled={
+                form.formState.isSubmitting ||
+                (!form.formState.isDirty &&
+                  form.watch("foto") === pengurus?.foto)
+              }
               className={cn({
                 "cursor-not-allowed opacity-60":
-                  form.formState.isSubmitting || !form.formState.isDirty,
+                  form.formState.isSubmitting ||
+                  (!form.formState.isDirty &&
+                    form.watch("foto") === pengurus?.foto),
               })}
             >
               {form.formState.isSubmitting && (

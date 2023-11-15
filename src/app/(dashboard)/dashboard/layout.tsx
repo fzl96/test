@@ -1,40 +1,17 @@
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import { Header } from "@/components/header";
-import { HeaderMobile } from "@/components/header-mobile";
-import { SideNav } from "@/components/side-nav";
-import { PageWrapper } from "@/components/page-wrapper";
-import { MarginWidthWrapper } from "@/components/margin-width-wrapper";
-import { Metadata } from "next";
+import { sidebarNavItems } from "@/config/dashboard";
+import { SidebarNav } from "@/components/sidebar-nav";
 
-export const metadata: Metadata = {
-  title: {
-    template: "%s | Dashboard Masjid Zaid bin Tsabit",
-    default: "Dashboard | Masjid Zaid bin Tsabit",
-  },
-  description: "Dashboard Masjid Zaid bin Tsabit",
-};
-
-export default async function Layout({
-  children,
-}: {
+interface LayoutProps {
   children: React.ReactNode;
-}) {
-  const session = await auth();
-  if (!session?.user) redirect("/login");
+}
 
+export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="flex">
-      {/* @ts-ignore */}
-      <SideNav role={session?.user.role} />
-      <main className="flex-1">
-        <MarginWidthWrapper>
-          <Header />
-          {/* @ts-ignore */}
-          <HeaderMobile role={session?.user.role} />
-          <PageWrapper>{children}</PageWrapper>
-        </MarginWidthWrapper>
-      </main>
+    <div className="flex-1 md:grid md:grid-cols-[220px_1fr] lg:grid-cols-[240px_1fr]">
+      <aside className="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto border-r  pr-2 md:sticky md:block lg:py-10">
+        <SidebarNav items={sidebarNavItems} />
+      </aside>
+      {children}
     </div>
   );
 }

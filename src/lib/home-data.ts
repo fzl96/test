@@ -199,3 +199,13 @@ export async function fetchFilteredKegiatan(
     console.log(error);
   }
 }
+
+export async function fetchPengurus() {
+  const pengurus = await db.pengurus.findMany({
+    orderBy: {
+      jabatan: "desc",
+    },
+  });
+
+  return pengurus;
+}

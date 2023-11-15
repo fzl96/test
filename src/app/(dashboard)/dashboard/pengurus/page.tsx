@@ -7,10 +7,11 @@ import { fetchUsersPages } from "@/lib/data";
 import Link from "next/link";
 import { Suspense } from "react";
 import { Metadata } from "next";
+import Pagination from "@/components/pagination";
 
 export const metadata: Metadata = {
   title: "Pengurus",
-  description: "Akun pengurus aplikasi web Masjid Zaid bin Tsabit",
+  description: "Pengurus Masjid Zaid bin Tsabit",
 };
 
 export default async function Page({
@@ -26,9 +27,9 @@ export default async function Page({
   const totalPages = await fetchUsersPages(query);
 
   return (
-    <>
+    <div className="md:px-5">
       <DashboardHeader
-        title="Akun Pengurus"
+        title="Pengurus"
         breadcrumbs={[
           { label: "Dashboard", href: "/dashboard" },
           { label: "Pengurus", href: "/dashboard/pengurus" },
@@ -38,14 +39,15 @@ export default async function Page({
           Tambah
         </Link>
       </DashboardHeader>
-      <div>
-        <div className="px-5 py-3">
-          <Search placeholder="Cari pengurus..." />
-        </div>
-        <Suspense key={currentPage} fallback={<TableSkeleton />}>
-          <PengurusTable currentPage={currentPage} query={query} />
-        </Suspense>
+      <div className="px-5 py-3">
+        <Search placeholder="Cari pengurus..." />
       </div>
-    </>
+      <Suspense key={currentPage} fallback={<TableSkeleton />}>
+        <PengurusTable currentPage={currentPage} query={query} />
+      </Suspense>
+      <div className="mt-5 flex w-full justify-center">
+        <Pagination totalPages={totalPages} />
+      </div>
+    </div>
   );
 }
