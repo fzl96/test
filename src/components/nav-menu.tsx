@@ -35,35 +35,53 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ];
 
+const profilComponents: { title: string; href: string; description: string }[] =
+  [
+    {
+      title: "Sejarah",
+      href: "/profil/sejarah",
+      description: "Sejarah terbangunnya Masjid Zaid bin Tsabit.",
+    },
+    {
+      title: "Visi & Misi",
+      href: "/profil/visi-misi",
+      description: "Visi dan misi Masjid Zaid bin Tsabit.",
+    },
+    {
+      title: "Pimpinan",
+      href: "/profil/pimpinan",
+      description: "Pimpinan Masjid Zaid bin Tsabit.",
+    },
+    {
+      title: "Imam dan Muadzin",
+      href: "/profil/imam-muadzin",
+      description: "Imam dan Muadzin di Masjid Zaid bin Tsabit.",
+    },
+  ];
+
 export function NavMenu() {
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        <NavigationMenuItem>
+        <NavigationMenuItem className="hover:bg-transparent">
           <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink
-              className={cn(navigationMenuTriggerStyle(), "bg-transparent")}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                "bg-transparent hover:bg-transparent"
+              )}
             >
               Beranda
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/profil" legacyBehavior passHref>
-            <NavigationMenuLink
-              className={cn(navigationMenuTriggerStyle(), "bg-transparent")}
-            >
-              Profil
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent">
-            Aktivitas
+          <NavigationMenuTrigger className="bg-transparent hover:bg-transparent">
+            Profil
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] p-4 md:w-[500px] md:grid-cols-1">
-              {components.map((component) => (
+            <ul className="grid w-[400px] p-4 md:w-[500px] md:grid-cols-2">
+              {profilComponents.map((component) => (
                 <ListItem
                   key={component.title}
                   title={component.title}
@@ -74,6 +92,42 @@ export function NavMenu() {
               ))}
             </ul>
           </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem className="hover:bg-transparent">
+          <Link href="/post/pengumuman" legacyBehavior passHref>
+            <NavigationMenuLink
+              className={cn(
+                navigationMenuTriggerStyle(),
+                "bg-transparent hover:bg-transparent"
+              )}
+            >
+              Pengumuman
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem className="hover:bg-transparent">
+          <Link href="/Aktivitas" legacyBehavior passHref>
+            <NavigationMenuLink
+              className={cn(
+                navigationMenuTriggerStyle(),
+                "bg-transparent hover:bg-transparent"
+              )}
+            >
+              Aktivitas
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem className="hover:bg-transparent">
+          <Link href="/" legacyBehavior passHref>
+            <NavigationMenuLink
+              className={cn(
+                navigationMenuTriggerStyle(),
+                "bg-transparent hover:bg-transparent"
+              )}
+            >
+              Artikel
+            </NavigationMenuLink>
+          </Link>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

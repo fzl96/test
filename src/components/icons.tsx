@@ -33,9 +33,19 @@ import {
   Newspaper,
   Pen,
   LucideIcon,
+  Copyright,
+  Instagram,
+  Facebook,
+  Youtube,
+  UserCheck,
 } from "lucide-react";
 
 export const Icons = {
+  userCheck: UserCheck,
+  instagram: Instagram,
+  facebook: Facebook,
+  youtube: Youtube,
+  copyright: Copyright,
   pen: Pen,
   newspaper: Newspaper,
   folder: Folder,

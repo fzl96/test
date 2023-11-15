@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/navbar";
 import React from "react";
 import { Metadata } from "next";
+import { SiteFooter } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: {
@@ -15,7 +16,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Navbar />
-      {children}
+      <main className="w-full">{children}</main>
+      <SiteFooter className="border-t mt-5 md:mt-0" />
     </>
   );
 }

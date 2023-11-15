@@ -5,6 +5,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import { EdgeStoreProvider } from "@/lib/edgestore";
+import { SiteFooter } from "@/components/footer";
 
 export const metadata: Metadata = {
   icons: {

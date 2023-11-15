@@ -1,45 +1,93 @@
-import { SideNavItem } from "@/lib/definitions";
+import { MainNavItem, SidebarNavItem, SideNavItem } from "@/lib/definitions";
 
-export const sideNavItems: SideNavItem[] = [
+export const mainNavItems: MainNavItem[] = [
   {
-    title: "Dashboard",
-    path: "/dashboard",
-    icon: "dashboard",
+    title: "Visi dan Misi",
+    href: "/profil/visi-misi",
   },
   {
-    title: "Keuangan",
-    path: "/keuangan",
-    icon: "wallet",
-    submenu: true,
-    subMenuItems: [
-      { title: "Pemasukan", path: "/dashboard/keuangan/pemasukan" },
-      { title: "Pengeluaran", path: "/dashboard/keuangan/pengeluaran" },
+    title: "Sejarah",
+    href: "/profil/sejarah",
+  },
+  {
+    title: "Pimpinan",
+    href: "/profil/pimpinan",
+  },
+  {
+    title: "Imam dan Muadzin",
+    href: "/profil/imam-muadzin",
+  },
+  {
+    title: "Kegiatan",
+    href: "/post/kegiatan",
+  },
+  {
+    title: "Pengumuman",
+    href: "/post/pengumuman",
+  },
+  {
+    title: "Artikel",
+    href: "/post/artikel",
+  },
+];
+
+export const sidebarNavItems: SidebarNavItem[] = [
+  {
+    title: "Beranda",
+    items: [{ title: "Dashboard", href: "/dashboard", icon: "dashboard" }],
+  },
+  {
+    title: "Keuangan Infaq Masjid",
+    items: [
+      {
+        title: "Pemasukan",
+        href: "/dashboard/keuangan/pemasukan",
+      },
+      {
+        title: "Pengeluaran",
+        href: "/dashboard/keuangan/pengeluaran",
+      },
     ],
   },
   {
-    title: "Inventaris",
-    path: "/dashboard/inventaris",
-    icon: "folder",
-  },
-  {
-    title: "Jamaah",
-    path: "/dashboard/jamaah",
-    icon: "users",
-  },
-  {
-    title: "Post",
-    path: "/dashboard/post",
-    icon: "newspaper",
-  },
-  {
-    title: "Pengurus",
-    path: "/dashboard/pengurus",
-    icon: "user",
+    title: "Data Masjid",
+    items: [
+      {
+        title: "Inventaris",
+        href: "/dashboard/inventaris",
+        icon: "folder",
+      },
+      {
+        title: "Jamaah",
+        href: "/dashboard/jamaah",
+        icon: "users",
+      },
+      {
+        title: "Pengurus Masjid",
+        href: "/dashboard/pengurus",
+        icon: "userCheck",
+      },
+      {
+        title: "Post",
+        href: "/dashboard/post",
+        icon: "newspaper",
+      },
+    ],
   },
   {
     title: "Pengaturan",
-    path: "/dashboard/pengaturan",
-    icon: "settings",
+    items: [
+      {
+        title: "Akun Pengurus",
+        href: "/dashboard/akun",
+        icon: "user",
+      },
+      {
+        title: "Pengaturan",
+        href: "/dashboard/pengaturan",
+        icon: "settings",
+      },
+    ],
   },
 ];
 

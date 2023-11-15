@@ -26,30 +26,41 @@ export function MobileNavToggle({ loggedIn }: { loggedIn?: boolean }) {
       <DropdownMenuTrigger>
         <Menu className="w-6 h-6" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="mr-5 w-[150px]">
-        <DropdownMenuItem>
-          <Link href="/profil">Profil</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/#jadwal-sholat">Jadwal Sholat</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/post/kegiatan">Kegiatan</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/post/pengumuman">Pengumuman</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/post/artikel">Artikel</Link>
-        </DropdownMenuItem>
+      <DropdownMenuContent className="mr-5 w-[200px]">
+        <Link href="/profil/sejarah">
+          <DropdownMenuItem>Sejarah</DropdownMenuItem>
+        </Link>
+        <Link href="/profil/visi-misi">
+          <DropdownMenuItem>Visi dan Misi</DropdownMenuItem>
+        </Link>
+        <Link href="/profil/pimpinan">
+          <DropdownMenuItem>Pimpinan</DropdownMenuItem>
+        </Link>
+        <Link href="/profil/imam-muadzin">
+          <DropdownMenuItem>Imam dan Muadzin</DropdownMenuItem>
+        </Link>
+        <Link href="/#jadwal-sholat">
+          <DropdownMenuItem>Jadwal Sholat</DropdownMenuItem>
+        </Link>
+        <Link href="/post/kegiatan">
+          <DropdownMenuItem>Kegiatan</DropdownMenuItem>
+        </Link>
+        <Link href="/post/pengumuman">
+          <DropdownMenuItem>Pengumuman</DropdownMenuItem>
+        </Link>
+        <Link href="/post/artikel">
+          <DropdownMenuItem>Artikel</DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          {!loggedIn ? (
-            <Link href="/login">Login</Link>
-          ) : (
+        {!loggedIn ? (
+          <Link href="/login">
+            <DropdownMenuItem>Login</DropdownMenuItem>
+          </Link>
+        ) : (
+          <DropdownMenuItem>
             <Link href="/dashboard">Dashboard</Link>
-          )}
-        </DropdownMenuItem>
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
