@@ -114,7 +114,7 @@ export default async function Home() {
         <Suspense fallback={<div>Loading...</div>}>
           <div className="my-8 space-y-4 w-full p-20 flex flex-col items-center gap-10 md:space-y-0">
             <h1 className="text-3xl text-white font-semibold ">
-              Jadwal Sholat Tanggal {formatDate(new Date())}
+              Jadwal Sholat {formatDate(new Date())}
             </h1>
             <div className="md:flex md:gap-12">
               <div className="text-white space-y-2">
