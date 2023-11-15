@@ -80,3 +80,28 @@ model Post {
   updatedAt DateTime  @updatedAt
   jenis     POST_TYPE
 }
+
+enum JABATAN {
+  PENASEHAT
+  KETUA
+  WAKIL_KETUA
+  SEKRETARIS
+  BIDANG_DANA
+  BIDANG_PENDIDIKAN_DAN_DAKWAH
+  BIDANG_SARANA_DAN_PRASARANA
+  BIDANG_SOSIAL
+  BIDANG_KEMITRAAN_DAN_INFOKOM
+  BIDANG_KEAMANAN_DAN_KETERTIBAN
+  IMAM
+  MUADZIN
+}
+
+model Pengurus {
+  id        String   @id @default(cuid())
+  nama      String
+  jabatan   String
+  foto      String?
+  noHp      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
