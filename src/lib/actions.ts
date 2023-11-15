@@ -7,10 +7,12 @@ import { DateTime } from "luxon";
 import { revalidatePath } from "next/cache";
 
 type FormData = z.infer<typeof pemasukanCreateSchema>;
-const jakartaTimezone = "Asia/Jakarta";
 
 export async function createPemasukan(formData: FormData) {
   const result = pemasukanCreateSchema.safeParse(formData);
+
+  const date = new Date();
+  date.setHours(date.getHours() + 7);
 
   if (!result.success) {
     return { error: result.error };
@@ -23,6 +25,8 @@ export async function createPemasukan(formData: FormData) {
       data: {
         keterangan,
         jumlah,
+        createdAt: date,
+        updatedAt: date,
       },
     });
 
@@ -36,6 +40,8 @@ export async function createPemasukan(formData: FormData) {
 export async function updatePemasukan(id: string, formData: FormData) {
   const result = pemasukanCreateSchema.safeParse(formData);
 
+  const date = new Date();
+  date.setHours(date.getHours() + 7);
   if (!result.success) {
     return { error: result.error };
   }
@@ -50,6 +56,7 @@ export async function updatePemasukan(id: string, formData: FormData) {
       data: {
         keterangan,
         jumlah,
+        updatedAt: date,
       },
     });
 

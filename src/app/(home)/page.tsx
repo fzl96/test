@@ -10,6 +10,7 @@ import type { Jadwal } from "@/lib/definitions";
 import Kegiatan from "@/components/kegiatan";
 import Artikel from "@/components/artikel";
 import Pengumuman from "@/components/pengumuman";
+import { formatDate, getNextPrayerTime } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Masjid Zaid bin Tsabit",
@@ -23,12 +24,14 @@ export default async function Home() {
   const session = await auth();
 
   const today = new Date();
+  today.setHours(today.getHours() + 7);
   const res = await fetch(
     `https://api.myquran.com/v1/sholat/jadwal/0412/${today.getFullYear()}/${
       today.getMonth() + 1
     }/${today.getDate()}`
   );
   const jadwal = await res.json();
+  const nextPrayerTime = getNextPrayerTime(jadwal);
 
   return (
     <>
@@ -109,30 +112,35 @@ export default async function Home() {
         className=" mt-32 mx-auto max-w-5xl sm:mt-56 relative bg-primary/70 rounded-xl"
       >
         <Suspense fallback={<div>Loading...</div>}>
-          <div className="my-8 space-y-4 w-full p-20 md:flex md:space-x-12 md:space-y-0">
-            <div className="text-white space-y-2">
-              <p>Jadwal Sholat Selanjutnya</p>
-              <p className="text-4xl font-semibold tracking-tight">
-                Shalat Maghrib
-              </p>
-              <p>
-                akan dimulai dalam{" "}
-                <span className="text-xl">01 Jam 03 Menit</span>
-              </p>
-            </div>
-            {waktu.map((item, index) => (
-              <div className="md:flex-1" key={index}>
-                <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-                  <span className="text-xl font-semibold text-white">
-                    {item}
-                  </span>
-                  <span className="mt-2 text-white">
-                    {jadwal.data?.jadwal[item.toLowerCase() as keyof Jadwal]}{" "}
-                    WIB
-                  </span>
-                </div>
+          <div className="my-8 space-y-4 w-full p-20 flex flex-col items-center gap-10 md:space-y-0">
+            <h1 className="text-3xl text-white font-semibold ">
+              Jadwal Sholat Tanggal {formatDate(new Date())}
+            </h1>
+            <div className="md:flex md:gap-12">
+              <div className="text-white space-y-2">
+                <p>Jadwal Sholat Selanjutnya</p>
+                <p className="text-4xl font-semibold tracking-tight">
+                  Shalat {nextPrayerTime?.next}
+                </p>
+                {/* <p>
+                  akan dimulai dalam{" "}
+                  <span className="text-xl">01 Jam 03 Menit</span>
+                </p> */}
               </div>
-            ))}
+              {waktu.map((item, index) => (
+                <div className="md:flex-1" key={index}>
+                  <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
+                    <span className="text-xl font-semibold text-white">
+                      Shalat {item}
+                    </span>
+                    <span className="mt-2 text-white">
+                      {jadwal.data?.jadwal[item.toLowerCase() as keyof Jadwal]}{" "}
+                      WIB
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </Suspense>
       </div>

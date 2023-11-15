@@ -2,6 +2,8 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
+import { Jadwal } from "./definitions";
+import { differenceInMinutes } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -76,4 +78,48 @@ export function capitalizeFirstLetter(string: string) {
 
 export function removeHtmlTags(string: string) {
   return string.replace(/(<([^>]+)>)/gi, "");
+}
+
+export function getNextPrayerTime(jadwal: Jadwal) {
+  const now = new Date();
+  now.setHours(now.getHours() + 7);
+
+  if (!jadwal.data) return null;
+
+  const jadwalArray = [
+    { waktu: "Subuh", jadwal: jadwal.data.jadwal.subuh },
+    { waktu: "Dzuhur", jadwal: jadwal.data.jadwal.dzuhur },
+    { waktu: "Ashar", jadwal: jadwal.data.jadwal.ashar },
+    { waktu: "Maghrib", jadwal: jadwal.data.jadwal.maghrib },
+    { waktu: "Isya", jadwal: jadwal.data.jadwal.isya },
+  ];
+
+  const jadwalSholat = jadwalArray.map((item) => {
+    const jamSplit = item.jadwal.split(":");
+    const jamSholat = new Date();
+    jamSholat.setHours(parseInt(jamSplit[0]));
+    jamSholat.setHours(jamSholat.getHours() + 7);
+    jamSholat.setMinutes(parseInt(jamSplit[1]));
+    jamSholat.setSeconds(0);
+    jamSholat.setMilliseconds(0);
+    // console.log(jamSholat);
+    return {
+      waktu: item.waktu,
+      jadwal: jamSholat,
+    };
+  });
+
+  for (let i = 0; i < jadwalSholat.length; i++) {
+    const prayer = jadwalSholat[i];
+    // if last index, return first index
+    if (prayer.jadwal > now) {
+      return {
+        next: prayer.waktu,
+      };
+    }
+
+    return {
+      next: jadwalSholat[0].waktu,
+    };
+  }
 }
