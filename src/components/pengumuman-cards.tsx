@@ -11,7 +11,7 @@ export async function PengumumanCards({
   const pengumuman = await fetchFilteredPengumuman(currentPage, query);
 
   return (
-    <div className="grid md:grid-cols-3 gap-4">
+    <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-4">
       {pengumuman?.map((pengumuman) => (
         <PostCard key={pengumuman.slug} post={pengumuman} />
       ))}

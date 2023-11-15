@@ -9,7 +9,7 @@ export default async function Kegiatan() {
 
   return (
     <div className="px-8">
-      <ol className="grid md:grid-cols-3 md:gap-14 gap-8">
+      <ol className="grid xl:grid-cols-3 lg:grid-cols-2 md:gap-14 gap-8">
         {kegiatan?.map((kegiatan: Post) => (
           <li className="md:flex-1" key={kegiatan.id}>
             <div className="-m-2 rounded-xl bg-gray-400/5 p-5 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4 md:p-4 flex-col space-y-3">

@@ -11,7 +11,7 @@ export async function ArtikelCards({
   const artikel = await fetchFilteredArtikel(currentPage, query);
 
   return (
-    <div className="grid md:grid-cols-3 gap-4">
+    <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-4">
       {artikel?.map((artikel: any) => (
         <PostCard key={artikel.slug} post={artikel} />
       ))}
