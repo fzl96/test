@@ -2,8 +2,7 @@ import { fetchFilteredPost } from "@/lib/data";
 import { capitalizeFirstLetter, cn, formatCurrency } from "@/lib/utils";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-import { DeleteButton } from "@/components/delete-button";
-import { Keterangan, KeteranganMobile } from "@/components/keterangan";
+import { DeleteButton } from "@/components/post-delete-button";
 import { deletePost } from "@/lib/actions/post-actions";
 import { Pencil } from "lucide-react";
 import { format } from "date-fns";
@@ -47,6 +46,7 @@ export async function PostTable({
                     id={post.id}
                     page="Post"
                     deleteFn={deletePost}
+                    url={post.thumbnail}
                   />
                 </div>
               </div>
@@ -121,12 +121,6 @@ export async function PostTable({
                   <br />
                   {format(post.tanggal, "dd, MMM yyyy", { locale: id })}
                 </td>
-                {/* <td className="px-3 py-3">
-                  <p className="whitespace-nowrap text-ellipsis w-[100px] overflow-hidden">
-                    {post.alamat}
-                  </p>
-                </td>
-                <td className="whitespace-nowrap px-3 py-3">{post.noHp}</td> */}
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                   <div className="flex justify-end gap-3">
                     <Link
@@ -142,6 +136,7 @@ export async function PostTable({
                       id={post.id}
                       page="Post"
                       deleteFn={deletePost}
+                      url={post.thumbnail}
                     />
                   </div>
                 </td>

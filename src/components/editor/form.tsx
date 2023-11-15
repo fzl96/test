@@ -91,12 +91,24 @@ export function PostForm({
   const { edgestore } = useEdgeStore();
 
   async function onSubmit(data: z.infer<typeof postSchema>) {
+    if (file && progress < 100) {
+      toast({
+        title: "Mohon tunggu",
+        description: "Foto sedang diunggah",
+      });
+      return;
+    }
     let res;
     if (updateFn && post) {
-      await edgestore.publicFiles.confirmUpload({
-        url: data.thumbnail || "",
-      });
       res = await updateFn(post.id, data);
+
+      if (data.thumbnail !== post.thumbnail) {
+        if (post.thumbnail) {
+          await edgestore.publicFiles.delete({
+            url: data.thumbnail || "",
+          });
+        }
+      }
     } else if (createFn) {
       res = await createFn(data);
     } else return;
@@ -108,6 +120,12 @@ export function PostForm({
         variant: "destructive",
       });
       return;
+    }
+
+    if (data.thumbnail) {
+      await edgestore.publicFiles.confirmUpload({
+        url: data.thumbnail || "",
+      });
     }
 
     router.push("/dashboard/post");
@@ -131,10 +149,16 @@ export function PostForm({
             <Breadcrumbs breadcrumbs={breadCrumbs || []} className="mb-0" />
             <Button
               type="submit"
-              disabled={form.formState.isSubmitting || !form.formState.isDirty}
+              disabled={
+                form.formState.isSubmitting ||
+                (!form.formState.isDirty &&
+                  form.watch("thumbnail") === post?.thumbnail)
+              }
               className={cn({
                 "cursor-not-allowed opacity-60":
-                  form.formState.isSubmitting || !form.formState.isDirty,
+                  form.formState.isSubmitting ||
+                  (!form.formState.isDirty &&
+                    form.watch("thumbnail") === post?.thumbnail),
               })}
             >
               {form.formState.isSubmitting && (
@@ -229,8 +253,7 @@ export function PostForm({
                   <Label className="">Thumbnail</Label>
                   <SingleImageDropzone
                     width={200}
-                    // height={400}
-                    value={file || form.getValues("thumbnail")}
+                    value={file || form.watch("thumbnail")}
                     dropzoneOptions={{
                       maxSize: 1024 * 1024 * 5,
                     }}
