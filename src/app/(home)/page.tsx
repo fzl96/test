@@ -143,10 +143,10 @@ export default async function Home() {
       >
         <div className="mb-12 px-6 lg:px-8">
           <div className="mx-auto max-w-2xl sm:text-center">
-            <h2 className="mt-2 font-bold text-4xl text-gray-900 sm:text-5xl">
+            <h2 className="mt-2 font-bold text-4xl text-gray-900 sm:text-5xl text-center">
               Aktivitas Masjid
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 text-lg text-gray-600 text-center">
               Aktivitas terbaru di Masjid Zaid bin Tsabit{" "}
             </p>
           </div>
@@ -175,10 +175,10 @@ export default async function Home() {
       >
         <div className="mb-12 px-6 lg:px-8">
           <div className="mx-auto max-w-2xl sm:text-center">
-            <h2 className="mt-2 font-bold text-4xl text-gray-900 sm:text-5xl">
+            <h2 className="mt-2 font-bold text-4xl text-gray-900 sm:text-5xl text-center">
               Pengumuman Masjid
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 text-lg text-gray-600 text-center">
               Pengumuman Terbaru dari Masjid Zaid bin Tsabit{" "}
             </p>
           </div>
@@ -207,10 +207,10 @@ export default async function Home() {
       >
         <div className="mb-12 px-6 lg:px-8">
           <div className="mx-auto max-w-2xl sm:text-center">
-            <h2 className="mt-2 font-bold text-4xl text-gray-900 sm:text-5xl">
+            <h2 className="mt-2 font-bold text-4xl text-gray-900 sm:text-5xl text-center">
               Artikel{" "}
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 text-lg text-gray-600 text-center">
               Artikel Terbaru dari Masjid Zaid bin Tsabit{" "}
             </p>
           </div>

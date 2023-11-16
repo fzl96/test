@@ -14,16 +14,18 @@ export default async function Pengumuman() {
         <div className="grid">
           {pengumuman.map((pengumuman: Post) => {
             return (
-              <div className="border-b p-5 flex gap-5" key={pengumuman.id}>
-                <div className="w-[200px] h-[120px] relative hidden md:block">
+              <div
+                className="border-b p-5 flex flex-col md:flex-row gap-5 w-full"
+                key={pengumuman.id}
+              >
+                <div className="md:w-[200px] md:h-[120px] h-[150px] relative md:block">
                   <Link href={`/post/${pengumuman.slug}`}>
                     <Image
                       src={pengumuman.thumbnail || ""}
                       alt={pengumuman.judul}
                       fill={true}
                       objectFit="cover"
-                      // sizes="200px"
-                      className="hidden w-full h-full md:block rounded-md ring-2 ring-gray-900/10 shadow-md"
+                      className="w-full h-full md:block rounded-md ring-2 ring-gray-900/10 shadow-md"
                     />
                   </Link>
                 </div>

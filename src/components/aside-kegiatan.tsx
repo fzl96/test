@@ -1,9 +1,9 @@
 import { Post } from "@/lib/definitions";
-import { fetchFiveLatestKegiatan } from "@/lib/home-data";
+import { fetchLatestKegiatan } from "@/lib/home-data";
 import Link from "next/link";
 
 export async function AsideKegiatan() {
-  const kegiatan = await fetchFiveLatestKegiatan();
+  const kegiatan = await fetchLatestKegiatan(5);
 
   return (
     <div>

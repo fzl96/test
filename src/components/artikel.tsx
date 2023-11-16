@@ -14,7 +14,7 @@ export default async function Kegiatan() {
         <div className="col-span-2 md:col-span-1">
           <div className="-m-2 rounded-xl bg-gray-400/5 p-5 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4 md:p-4 flex-col space-y-3">
             <Link href={`/post/${artikel[0].slug}`}>
-              <div className="w-full h-[200px] relative hidden md:block">
+              <div className="w-full md:h-[200px] h-[150px] relative md:block">
                 <Image
                   src={artikel[0].thumbnail || ""}
                   alt={artikel[0].judul}
@@ -39,22 +39,19 @@ export default async function Kegiatan() {
             </div>
           </div>
         </div>
-        <div className="col-span-2 flex flex-col gap-10">
+        <div className="col-span-2 flex flex-col md:gap-10 gap-8">
           {artikel.map((artikel: Post, index: number) => {
             if (index === 0) return;
-
             return (
               <div
-                className="-m-2 rounded-xl bg-gray-400/5 p-5 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4 md:p-4 md:flex gap-5"
+                className="-m-2 rounded-xl bg-gray-400/5 p-5 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4 md:p-4 flex flex-col md:flex-row md:gap-5 gap-3"
                 key={artikel.id}
               >
                 <Link href={`/post/${artikel.slug}`}>
-                  <div className="relative w-[200px] h-[130px] ">
+                  <div className="relative md:w-[200px] md:h-[130px] h-[150px] ">
                     <Image
                       src={artikel.thumbnail || ""}
                       alt={artikel.judul}
-                      // width={200}
-                      // height={100}
                       fill
                       objectFit="cover"
                       className="rounded-md h-full w-full object-cover ring-2 ring-gray-900/10 shadow-md "
@@ -63,10 +60,10 @@ export default async function Kegiatan() {
                 </Link>
                 <div className="flex flex-col gap-3">
                   <Link href={`/post/${artikel.slug}`}>
-                    <h2 className="text-base font-semibold leading-6">
+                    <h2 className="text-lg md:text-base font-semibold leading-6">
                       {artikel.judul}
                     </h2>
-                    <p className="mt-2 text-zinc-700 text-sm">
+                    <p className="mt-2 text-zinc-700 md:text-sm text-base">
                       {artikel.konten.length > 100
                         ? removeHtmlTags(artikel.konten.slice(0, 100)) + "..."
                         : removeHtmlTags(artikel.konten)}
