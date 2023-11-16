@@ -134,6 +134,23 @@ export async function fetchFilteredInventaris(
   }
 }
 
+export async function fetchInventaris() {
+  noStore();
+
+  try {
+    const data = await db.inventaris.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log("Database Error: ", error);
+    throw new Error("Gagal mengambil data inventaris");
+  }
+}
+
 export async function fetchInventarisPages(query: string) {
   noStore();
   try {

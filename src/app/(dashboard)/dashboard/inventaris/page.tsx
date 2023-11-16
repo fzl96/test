@@ -7,6 +7,7 @@ import { TableSkeleton } from "@/components/table-skeleton";
 import { InventarisTable } from "@/components/inventaris/inventaris-table";
 import Search from "@/components/search";
 import { Metadata } from "next";
+import { ExportInventaris } from "@/components/inventaris/export";
 
 export const metadata: Metadata = {
   title: "Inventaris",
@@ -34,7 +35,10 @@ export default async function Page({
           { label: "Inventaris", href: "/dashboard/inventaris" },
         ]}
       >
-        <AddButton />
+        <div className="space-x-2">
+          <ExportInventaris />
+          <AddButton />
+        </div>
       </DashboardHeader>
       <div>
         <div className="px-5 py-3">

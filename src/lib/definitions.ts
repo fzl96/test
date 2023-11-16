@@ -15,6 +15,15 @@ export type Keuangan = {
   updatedAt: Date;
 };
 
+export type Inventaris = {
+  id: string;
+  nama: string;
+  jumlah: number;
+  keterangan: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type Pengurus = {
   id: string;
   nama: string;
@@ -116,4 +125,5 @@ export type SiteConfig = {
     instagram: string;
     youtube: string;
   };
+  thumbnailPlaceholder: string;
 };
