@@ -18,7 +18,7 @@ export const mainNavItems: MainNavItem[] = [
     href: "/profil/imam-muadzin",
   },
   {
-    title: "Kegiatan",
+    title: "aktivitas",
     href: "/post/kegiatan",
   },
   {

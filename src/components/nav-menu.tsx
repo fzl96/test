@@ -106,7 +106,7 @@ export function NavMenu() {
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem className="hover:bg-transparent">
-          <Link href="/Aktivitas" legacyBehavior passHref>
+          <Link href="/post/kegiatan" legacyBehavior passHref>
             <NavigationMenuLink
               className={cn(
                 navigationMenuTriggerStyle(),
@@ -118,7 +118,7 @@ export function NavMenu() {
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem className="hover:bg-transparent">
-          <Link href="/" legacyBehavior passHref>
+          <Link href="/post/artikel" legacyBehavior passHref>
             <NavigationMenuLink
               className={cn(
                 navigationMenuTriggerStyle(),

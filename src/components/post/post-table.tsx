@@ -108,7 +108,9 @@ export async function PostTable({
                       "shadow-none"
                     )}
                   >
-                    {capitalizeFirstLetter(post.jenis.toLocaleLowerCase())}
+                    {post.jenis === "KEGIATAN"
+                      ? "Aktivitas"
+                      : capitalizeFirstLetter(post.jenis.toLocaleLowerCase())}
                   </Badge>
                 </td>
                 {/* <td className="whitespace-nowrap px-3 py-3">

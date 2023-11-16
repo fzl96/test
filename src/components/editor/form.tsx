@@ -60,7 +60,7 @@ interface PostFormProps {
 }
 
 const options: { value: string; label: string }[] = [
-  { value: "KEGIATAN", label: "Kegiatan" },
+  { value: "KEGIATAN", label: "Aktivitas" },
   { value: "PENGUMUMAN", label: "Pengumuman" },
   { value: "ARTIKEL", label: "Artikel" },
 ];
@@ -101,11 +101,12 @@ export function PostForm({
     let res;
     if (updateFn && post) {
       res = await updateFn(post.id, data);
+      // console.log();
 
       if (data.thumbnail !== post.thumbnail) {
         if (post.thumbnail) {
           await edgestore.publicFiles.delete({
-            url: data.thumbnail || "",
+            url: post.thumbnail,
           });
         }
       }

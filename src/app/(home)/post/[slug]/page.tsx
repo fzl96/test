@@ -58,9 +58,11 @@ export default async function Page({
                       "shadow-none"
                     )}
                   >
-                    {capitalizeFirstLetter(
-                      post?.jenis.toLowerCase() || "lainnya"
-                    )}
+                    {post?.jenis === "KEGIATAN"
+                      ? "Aktivitas"
+                      : capitalizeFirstLetter(
+                          post?.jenis.toLowerCase() || "lainnya"
+                        )}
                   </Badge>
                 </span>
               </h4>

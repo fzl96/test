@@ -23,10 +23,10 @@ export default async function Page({
   return (
     <MaxWidthWrapper className="mt-10">
       <h1 className="text-3xl text-center tracking-tight font-semibold">
-        Kegiatan
+        Aktivitas
       </h1>
       <div className="py-3">
-        <Search placeholder="Cari kegiatan..." />
+        <Search placeholder="Cari Aktivitas..." />
       </div>
       <Suspense key={currentPage} fallback={<>Loading...</>}>
         <KegiatanCards currentPage={currentPage} query={query} />
