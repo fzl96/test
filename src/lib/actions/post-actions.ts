@@ -21,6 +21,14 @@ export async function createPost(formData: FormData) {
   const { authorId, judul, konten, jenis, thumbnail, tanggal } = result.data;
   const slug = judul.toLowerCase().replace(/\s/g, "-");
 
+  const postCount = await db.post.count({
+    where: {
+      slug,
+    },
+  });
+
+  const newSlug = postCount > 0 ? `${slug}-${postCount + 1}` : slug;
+
   try {
     const post = await db.post.create({
       data: {
@@ -34,7 +42,7 @@ export async function createPost(formData: FormData) {
         jenis,
         thumbnail,
         tanggal,
-        slug,
+        slug: newSlug,
         createdAt: date,
         updatedAt: date,
       },
