@@ -9,4 +9,5 @@ export const siteConfig: SiteConfig = {
     facebook: "https://facebook.com/masjidzaidbintsabit",
     instagram: "https://instagram.com/masjidzaidbintsabit",
   },
+  thumbnailPlaceholder: "/thumbnail-placeholder.jpeg",
 };
