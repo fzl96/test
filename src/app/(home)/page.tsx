@@ -112,17 +112,14 @@ export default async function Home() {
             <h1 className="text-3xl text-white font-semibold ">
               Jadwal Sholat {formatDate(new Date())}
             </h1>
-            <div className="md:flex md:gap-12">
-              <div className="text-white space-y-2">
+            <div className="md:flex md:gap-12 max-w-2xl">
+              {/* <div className="text-white space-y-2">
                 <p>Jadwal Sholat Selanjutnya</p>
                 <p className="text-4xl font-semibold tracking-tight">
                   Shalat {nextPrayerTime?.next}
                 </p>
-                {/* <p>
-                  akan dimulai dalam{" "}
-                  <span className="text-xl">01 Jam 03 Menit</span>
-                </p> */}
-              </div>
+            
+              </div> */}
               {waktu.map((item, index) => (
                 <div className="md:flex-1" key={index}>
                   <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
