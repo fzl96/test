@@ -23,7 +23,9 @@ export async function createPost(formData: FormData) {
 
   const postCount = await db.post.count({
     where: {
-      slug,
+      slug: {
+        startsWith: slug,
+      },
     },
   });
 
