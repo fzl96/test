@@ -117,9 +117,8 @@ export function getNextPrayerTime(jadwal: Jadwal) {
         next: prayer.waktu,
       };
     }
-
-    return {
-      next: jadwalSholat[0].waktu,
-    };
   }
+  return {
+    next: jadwalSholat[0].waktu,
+  };
 }

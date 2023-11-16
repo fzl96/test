@@ -12,6 +12,7 @@ import Artikel from "@/components/artikel";
 import Pengumuman from "@/components/pengumuman";
 import { formatDate, getNextPrayerTime } from "@/lib/utils";
 import { CarouselSlide } from "@/components/carousel-slide";
+import { DateTime } from "luxon";
 
 export const metadata: Metadata = {
   title: "Masjid Zaid bin Tsabit",

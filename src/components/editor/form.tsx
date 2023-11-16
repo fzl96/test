@@ -101,7 +101,6 @@ export function PostForm({
     let res;
     if (updateFn && post) {
       res = await updateFn(post.id, data);
-      // console.log();
 
       if (data.thumbnail !== post.thumbnail) {
         if (post.thumbnail) {
