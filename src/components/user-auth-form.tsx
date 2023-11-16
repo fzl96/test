@@ -104,7 +104,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            Login
+            Masuk
           </button>
           {loginError && (
             <p className="px-1 text-base text-red-600">

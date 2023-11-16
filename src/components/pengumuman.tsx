@@ -1,20 +1,21 @@
 import { fetchLatestPengumuman } from "@/lib/home-data";
 import Image from "next/image";
-import { removeHtmlTags } from "@/lib/utils";
+import { cn, removeHtmlTags } from "@/lib/utils";
 import Link from "next/link";
 import { Post } from "@/lib/definitions";
+import { buttonVariants } from "./ui/button";
 
 export default async function Pengumuman() {
   const pengumuman = await fetchLatestPengumuman();
 
   return (
-    <div className="px-8">
+    <div className="px-8 flex flex-col items-center">
       <div className="-m-2 rounded-xl bg-gray-400/5 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl  flex-col space-y-3">
         <div className="grid">
           {pengumuman.map((pengumuman: Post) => {
             return (
               <div className="border-b p-5 flex gap-5" key={pengumuman.id}>
-                <div className="w-[200px] relative hidden md:block">
+                <div className="w-[200px] h-[120px] relative hidden md:block">
                   <Link href={`/post/${pengumuman.slug}`}>
                     <Image
                       src={pengumuman.thumbnail || ""}
@@ -22,7 +23,7 @@ export default async function Pengumuman() {
                       fill={true}
                       objectFit="cover"
                       // sizes="200px"
-                      className="hidden md:block rounded-md"
+                      className="hidden w-full h-full md:block rounded-md ring-2 ring-gray-900/10 shadow-md"
                     />
                   </Link>
                 </div>
@@ -47,6 +48,11 @@ export default async function Pengumuman() {
           })}
         </div>
       </div>
+      <>
+        <Link href="/post/pengumuman" className={cn(buttonVariants(), "mt-10")}>
+          Lihat Semua Pengumuman
+        </Link>
+      </>
     </div>
   );
 }

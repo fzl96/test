@@ -5,9 +5,9 @@ import { startOfDay, endOfDay, startOfMonth, endOfMonth } from "date-fns";
 import { months } from "@/config/dashboard";
 import { Monthly } from "./definitions";
 
-export async function fetchFiveLatestKegiatan() {
+export async function fetchLatestKegiatan(take = 3) {
   const kegiatan = await db.post.findMany({
-    take: 3,
+    take: take,
     orderBy: {
       updatedAt: "desc",
     },
