@@ -75,10 +75,14 @@ export async function fetchArtikelPages(query: string) {
   try {
     const totalItems = await db.post.count({
       where: {
-        judul: {
-          contains: query,
-        },
         jenis: "ARTIKEL",
+        OR: [
+          {
+            judul: {
+              contains: query,
+            },
+          },
+        ],
       },
     });
 
@@ -116,9 +120,13 @@ export async function fetchPengumumanPages(query: string) {
   try {
     const totalItems = await db.post.count({
       where: {
-        judul: {
-          contains: query,
-        },
+        OR: [
+          {
+            judul: {
+              contains: query,
+            },
+          },
+        ],
         jenis: "PENGUMUMAN",
       },
     });
@@ -160,14 +168,19 @@ export async function fetchKegiatanlPages(query: string) {
   try {
     const totalItems = await db.post.count({
       where: {
-        judul: {
-          contains: query,
-        },
+        OR: [
+          {
+            judul: {
+              contains: query,
+            },
+          },
+        ],
         jenis: "KEGIATAN",
       },
     });
 
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    // console.log("total : ", totalPages);
 
     return totalPages;
   } catch (error) {

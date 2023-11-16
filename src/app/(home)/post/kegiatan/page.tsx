@@ -2,7 +2,7 @@ import { KegiatanCards } from "@/components/kegiatan-cards";
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import Pagination from "@/components/pagination";
 import Search from "@/components/search";
-import { fetchArtikelPages } from "@/lib/home-data";
+import { fetchArtikelPages, fetchKegiatanlPages } from "@/lib/home-data";
 import { Suspense } from "react";
 import { Metadata } from "next";
 
@@ -18,7 +18,7 @@ export default async function Page({
 }) {
   const currentPage = Number(searchParams?.page || 1);
   const query = searchParams?.query || "";
-  const totalPages = await fetchArtikelPages(query);
+  const totalPages = await fetchKegiatanlPages(query);
 
   return (
     <MaxWidthWrapper className="mt-10">
