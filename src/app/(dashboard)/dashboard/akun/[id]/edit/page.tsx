@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 export default async function Page({ params }: { params: { id: string } }) {
   const { id } = params;
   const akun = await fetchAkunById(id);
+  console.log(akun);
 
   return (
     <div className="">
@@ -26,7 +27,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       />
       <Suspense fallback={<div>Loading...</div>}>
         {/* @ts-ignore */}
-        <AkunForm updateFn={updateAkun} pengurus={akun} />
+        <AkunForm updateFn={updateAkun} akun={akun} />
       </Suspense>
     </div>
   );
