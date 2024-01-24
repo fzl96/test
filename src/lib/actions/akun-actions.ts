@@ -85,6 +85,8 @@ export async function updateAkun(id: string, formData: FormData) {
 }
 
 export async function deleteAkun(id: string) {
+  const uid = process.env.ADMIN_UID;
+  if (id === uid) return { error: "Akun ini tidak dapat dihapus" };
   try {
     await db.user.delete({
       where: { id: id },
