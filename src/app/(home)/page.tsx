@@ -1,18 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import { buttonVariants } from "@/components/ui/button";
-import { auth } from "@/lib/auth";
-import type { Jadwal } from "@/lib/definitions";
 import Kegiatan from "@/components/kegiatan";
 import Artikel from "@/components/artikel";
 import Pengumuman from "@/components/pengumuman";
-import { formatDate, getNextPrayerTime } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import { CarouselSlide } from "@/components/carousel-slide";
-import { DateTime } from "luxon";
 
 export const metadata: Metadata = {
   title: "Masjid Zaid bin Tsabit",
@@ -20,21 +16,42 @@ export const metadata: Metadata = {
     "Masjid Zaid bin Tsabit merupakan sebuah masjid yang ada di Kota Pekanbaru yang berlokasi di Jalan Delima",
 };
 
-const waktu: string[] = ["Subuh", "Dzuhur", "Ashar", "Maghrib", "Isya"];
+const waktu = [
+  {
+    value: "Fajr",
+    label: "Subuh",
+  },
+  {
+    value: "Dhuhr",
+    label: "Dzuhur",
+  },
+  {
+    value: "Asr",
+    label: "Ashar",
+  },
+  {
+    value: "Maghrib",
+    label: "Maghrib",
+  },
+  {
+    value: "Isha",
+    label: "Isya",
+  },
+];
 
 export default async function Home() {
-  const session = await auth();
-
   const today = new Date();
-  today.setHours(today.getHours() + 7);
-  const res = await fetch(
-    `https://api.myquran.com/v1/sholat/jadwal/0412/${today.getFullYear()}/${
-      today.getMonth() + 1
-    }/${today.getDate()}`
-  );
+  const query = new URLSearchParams({
+    latitude: "0.46907443531237847",
+    longitude: "101.4074763554276",
+    method: "15",
+  });
+  const apiURL = `https://api.aladhan.com/v1/timings/${today.getDate()}-${
+    today.getMonth() + 1
+  }-${today.getFullYear()}?${query}`;
+  const res = await fetch(apiURL);
   const jadwal = await res.json();
-  const nextPrayerTime = getNextPrayerTime(jadwal);
-
+  // const jadwal = await res.json();
   return (
     <>
       <MaxWidthWrapper className="mb-12 mt-28 sm:mt-40 flex flex-col items-center justify-center text-center">
@@ -118,17 +135,16 @@ export default async function Home() {
                 <p className="text-4xl font-semibold tracking-tight">
                   Shalat {nextPrayerTime?.next}
                 </p>
-            
+
               </div> */}
               {waktu.map((item, index) => (
                 <div className="md:flex-1" key={index}>
                   <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
                     <span className="text-xl font-semibold text-white">
-                      Shalat {item}
+                      Shalat {item.label}
                     </span>
                     <span className="mt-2 text-white">
-                      {jadwal.data?.jadwal[item.toLowerCase() as keyof Jadwal]}{" "}
-                      WIB
+                      {jadwal.data?.timings[item.value]} WIB
                     </span>
                   </div>
                 </div>
