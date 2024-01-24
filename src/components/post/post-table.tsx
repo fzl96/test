@@ -31,7 +31,24 @@ export async function PostTable({
                 </div>
               </div>
               <div className="flex w-full items-center justify-between pt-4">
-                <div>{/* <p className="text-sm">{post.noHp}</p> */}</div>
+                {/* <div><p className="text-sm">{post.noHp}</p></div> */}
+                <Badge
+                  className={cn(
+                    {
+                      "bg-green-100 text-green-600 hover:bg-green-200":
+                        post.jenis === "KEGIATAN",
+                      "bg-blue-100 text-blue-600 hover:bg-blue-200":
+                        post.jenis === "PENGUMUMAN",
+                      "bg-yellow-100 text-yellow-600 hover:bg-yellow-200":
+                        post.jenis === "ARTIKEL",
+                    },
+                    "shadow-none"
+                  )}
+                >
+                  {post.jenis === "KEGIATAN"
+                    ? "Aktivitas"
+                    : capitalizeFirstLetter(post.jenis.toLocaleLowerCase())}
+                </Badge>
                 <div className="flex justify-end gap-2">
                   <Link
                     href={`/dashboard/post/${post.id}/edit`}
