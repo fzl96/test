@@ -9,9 +9,10 @@ import { Icons } from "./icons";
 
 export interface DocsSidebarNavProps {
   items: SidebarNavItem[];
+  user: any;
 }
 
-export function SidebarNav({ items }: DocsSidebarNavProps) {
+export function SidebarNav({ items, user }: DocsSidebarNavProps) {
   const pathname = usePathname();
 
   return items.length ? (
@@ -22,7 +23,11 @@ export function SidebarNav({ items }: DocsSidebarNavProps) {
             {item.title}
           </h4>
           {item.items ? (
-            <SidebarNavItems items={item.items} pathname={pathname} />
+            <SidebarNavItems
+              items={item.items}
+              pathname={pathname}
+              user={user}
+            />
           ) : null}
         </div>
       ))}
@@ -33,12 +38,23 @@ export function SidebarNav({ items }: DocsSidebarNavProps) {
 interface SidebarNavItemsProps {
   items: SideNavItem[];
   pathname: string | null;
+  user: any;
 }
 
-export function SidebarNavItems({ items, pathname }: SidebarNavItemsProps) {
+export function SidebarNavItems({
+  items,
+  pathname,
+  user,
+}: SidebarNavItemsProps) {
   return items?.length ? (
     <div className="grid gap-1 grid-flow-row auto-rows-max text-sm">
       {items.map((item, index) => {
+        if (
+          user.role !== "ADMIN" &&
+          (item.href === "/dashboard/akun" ||
+            item.href === "/dashboard/pengurus")
+        )
+          return null;
         const Icon = Icons[item.icon || "arrowRight"];
         return item.href ? (
           <Link

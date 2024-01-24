@@ -24,13 +24,14 @@ export default async function Layout({
 }) {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  console.log(session.user);
 
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-40 w-full border-b bg-background">
         <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-          <MainNav items={mainNavItems}>
-            <SidebarNav items={sidebarNavItems} />
+          <MainNav items={mainNavItems} user={session.user}>
+            <SidebarNav items={sidebarNavItems} user={session.user} />
           </MainNav>
         </div>
       </header>
