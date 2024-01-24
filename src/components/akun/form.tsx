@@ -35,7 +35,7 @@ type FormData = z.infer<typeof akunSchema>;
 
 const options: { value: string; label: string }[] = [
   { value: "ADMIN", label: "Admin" },
-  { value: "akun", label: "Pengurus" },
+  { value: "PENGURUS", label: "Pengurus" },
 ];
 
 interface AkunExtended extends FormData {
@@ -51,6 +51,7 @@ export function AkunForm({
   createFn?: (data: FormData) => Promise<any>;
   updateFn?: (id: string, data: FormData) => Promise<any>;
 }) {
+  console.log(akun);
   const router = useRouter();
   const form = useForm<FormData>({
     resolver: zodResolver(akunSchema),
