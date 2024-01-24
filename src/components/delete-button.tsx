@@ -57,7 +57,7 @@ export function DeleteButton({ id, page, deleteFn }: DeleteButtonProps) {
               if (res.error) {
                 toast({
                   title: "Terjadi kesalahan",
-                  description: `${res.error}, silahkan coba lagi`,
+                  description: `${res.error}`,
                   variant: "destructive",
                 });
                 setIsDeleteLoading(false);
