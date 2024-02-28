@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { Suspense } from "react";
-import { unstable_noStore as noStore } from "next/cache";
+
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import { buttonVariants } from "@/components/ui/button";
 import Kegiatan from "@/components/kegiatan";
@@ -40,7 +40,6 @@ const waktu = [
 ];
 
 export default async function Home() {
-  noStore();
   const today = new Date();
   const query = new URLSearchParams({
     latitude: "0.46907443531237847",
@@ -94,6 +93,7 @@ export default async function Home() {
               className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#80a4ff] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
             />
           </div>
+
           <div>
             <div className="mx-auto max-w-6xl px-6 lg:px-8">
               <div className="mt-16 flow-root sm:mt-24">
