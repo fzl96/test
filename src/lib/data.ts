@@ -3,7 +3,7 @@ import { unstable_noStore as noStore } from "next/cache";
 import { DateTime } from "luxon";
 import { startOfDay, endOfDay, startOfMonth, endOfMonth } from "date-fns";
 import { months } from "@/config/dashboard";
-import { Monthly } from "./definitions";
+import { FinanceMonth, Monthly } from "./definitions";
 
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredPemasukan(currentPage: number) {
@@ -320,41 +320,87 @@ export async function fetchChartData(year: number) {
   noStore();
 
   try {
-    const data: Monthly[] = await db.$queryRaw`
-      SELECT
-        month,
-        SUM(totalPemasukan) AS totalPemasukan,
-        SUM(totalPengeluaran) AS totalPengeluaran
-      FROM (
-        SELECT
-          EXTRACT(MONTH FROM pm.createdAt) AS month,
-          pm.jumlah AS totalPemasukan,
-          NULL AS totalPengeluaran
-        FROM Pemasukan as pm
-        WHERE createdAt >= ${new Date(year, 0, 1)} 
-        AND createdAt <= ${new Date(year + 1, 0, 1)}
-        UNION ALL
-        SELECT
-          EXTRACT(MONTH FROM pg.createdAt) AS month,
-          NULL AS totalPemasukan,
-          pg.jumlah AS totalPengeluaran
-        FROM Pengeluaran as pg
-        WHERE createdAt >= ${new Date(year, 0, 1)}
-        AND createdAt <= ${new Date(year + 1, 0, 1)}
-      ) as subquery
-      GROUP BY month;
+    const pemasukanQuery = db.$queryRaw`
+    SELECT
+      EXTRACT(MONTH FROM "createdAt") as month,
+      SUM(jumlah) as total
+    FROM "Pemasukan"
+    WHERE "createdAt" >= ${new Date(year, 0, 1)}
+    AND "createdAt" <= ${new Date(year + 1, 0, 1)}
+    GROUP BY month;
     `;
 
-    const monthly = months.map((month) => {
-      const monthData = data.find((item) => Number(item.month) === month.value);
+    const pengeluaranQuery = db.$queryRaw`
+    SELECT
+      EXTRACT(MONTH FROM "createdAt") as month,
+      SUM(jumlah) as total
+    FROM "Pengeluaran"
+    WHERE "createdAt" >= ${new Date(year, 0, 1)}
+    AND "createdAt" <= ${new Date(year + 1, 0, 1)}
+    GROUP BY month;
+  `;
+
+    const [pemasukan, pengeluaran] = await db.$transaction([
+      pemasukanQuery,
+      pengeluaranQuery,
+    ]);
+
+    const data = months.map((month) => {
+      // @ts-ignore
+      const pemasukanData = pemasukan.find(
+        (item: FinanceMonth) => Number(item.month) === month.value
+      );
+      // @ts-ignore
+      const pengeluaranData = pengeluaran.find(
+        (item: FinanceMonth) => Number(item.month) === month.value
+      );
+
       return {
         month: month.short,
-        totalPemasukan: monthData ? Number(monthData.totalPemasukan) : 0,
-        totalPengeluaran: monthData ? Number(monthData.totalPengeluaran) : 0,
+        totalPemasukan: pemasukanData ? Number(pemasukanData.total) : 0,
+        totalPengeluaran: pengeluaranData ? Number(pengeluaranData.total) : 0,
       };
     });
 
-    return monthly;
+    console.log(data);
+
+    return data;
+
+    // const data: Monthly[] = await db.$queryRaw`
+    //   SELECT
+    //     month,
+    //     SUM(totalPemasukan) AS totalPemasukan,
+    //     SUM(totalPengeluaran) AS totalPengeluaran
+    //   FROM (
+    //     SELECT
+    //       EXTRACT(MONTH FROM pm."createdAt") AS month,
+    //       pm.jumlah AS totalPemasukan,
+    //       NULL AS totalPengeluaran
+    //     FROM "Pemasukan" as pm
+    //     WHERE createdAt >= ${new Date(year, 0, 1)}
+    //     AND createdAt <= ${new Date(year + 1, 0, 1)}
+    //     UNION ALL
+    //     SELECT
+    //       EXTRACT(MONTH FROM pg.createdAt) AS month,
+    //       NULL AS totalPemasukan,
+    //       pg.jumlah AS totalPengeluaran
+    //     FROM "Pengeluaran" as "pg"
+    //     WHERE createdAt >= ${new Date(year, 0, 1)}
+    //     AND createdAt <= ${new Date(year + 1, 0, 1)}
+    //   ) as subquery
+    //   GROUP BY month;
+    // `;
+
+    // const monthly = months.map((month) => {
+    //   const monthData = data.find((item) => Number(item.month) === month.value);
+    //   return {
+    //     month: month.short,
+    //     totalPemasukan: monthData ? Number(monthData.totalPemasukan) : 0,
+    //     totalPengeluaran: monthData ? Number(monthData.totalPengeluaran) : 0,
+    //   };
+    // });
+
+    // return monthly;
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error("Gagal mengambil data chart");

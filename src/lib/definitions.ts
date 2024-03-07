@@ -68,6 +68,11 @@ export type MenuItemWithSubMenuProps = {
   toggleOpen: () => void;
 };
 
+export type FinanceMonth = {
+  month: number | string;
+  total: number;
+};
+
 export type Monthly = {
   month: string | number;
   totalPemasukan: number;
