@@ -3,9 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // relationMode = "prisma"
 }
 
 model User {
@@ -72,10 +72,10 @@ model Post {
   judul     String
   slug      String    @unique
   thumbnail String?
-  penulis   User?      @relation(fields: [penulisId], references: [id])
+  penulis   User?     @relation(fields: [penulisId], references: [id])
   penulisId String?
   tanggal   DateTime  @default(now())
-  konten    String    @db.LongText
+  konten    String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   jenis     POST_TYPE
