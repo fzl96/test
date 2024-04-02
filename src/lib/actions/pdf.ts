@@ -21,6 +21,9 @@ export function createPdf(data: Keuangan[], fileName: string) {
       ];
     }),
   });
+
+  const total = data.reduce((acc, item) => acc + item.jumlah, 0);
+
   let finalY = (doc as any).lastAutoTable.finalY;
   const hasSpace = 297 - finalY > 60;
   if (!hasSpace) doc.addPage();
@@ -28,10 +31,12 @@ export function createPdf(data: Keuangan[], fileName: string) {
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
+  doc.text("Total: ", 15, startY - 15);
+  doc.text(formatCurrency(total), 28, startY - 15);
   doc.text("PENGURUS MASJID ZAID BIN TSABIT", 130, startY);
   doc.text("KETUA", 130, startY + 5);
   doc.setFontSize(11);
-  doc.text("Yana Patriana", 130, startY + 30);
+  doc.text("Azwar Anas", 130, startY + 30);
   doc.save(`${fileName}.pdf`);
 }
 
@@ -56,6 +61,6 @@ export function createInventarisPdf(data: Inventaris[]) {
   doc.text("PENGURUS MASJID ZAID BIN TSABIT", 130, startY);
   doc.text("KETUA", 130, startY + 5);
   doc.setFontSize(11);
-  doc.text("Yana Patriana", 130, startY + 30);
+  doc.text("Azwar Anas", 130, startY + 30);
   doc.save(`inventaris.pdf`);
 }
